@@ -1,22 +1,22 @@
-<mxfile host="Electron" modified="2024-04-18T07:57:44.613Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.2.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="F8i1Go75fd0g6KqO5Js9" version="24.2.5" type="device">
+<mxfile host="Electron" modified="2024-04-18T11:26:16.076Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.2.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="8RHA2qH7J2ABWY9WOqow" version="24.2.5" type="device">
   <diagram name="Logo" id="g8LNIn677Dj4tBUYOe0N">
-    <mxGraphModel dx="868" dy="605" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="868" dy="1705" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="j0SVLzz-3dvo6EfwO2ZV-1" value="C" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=120;fontFamily=Courier New;fontStyle=1;fontColor=#007FFF;" vertex="1" parent="1">
+        <mxCell id="j0SVLzz-3dvo6EfwO2ZV-1" value="C" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=120;fontFamily=Raleway;fontStyle=1;fontColor=#007FFF;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRaleway;" parent="1" vertex="1">
           <mxGeometry x="40" y="40" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="j0SVLzz-3dvo6EfwO2ZV-2" value="Q" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=120;fontFamily=Courier New;fontStyle=1;fontColor=#00CC00;" vertex="1" parent="1">
+        <mxCell id="j0SVLzz-3dvo6EfwO2ZV-2" value="Q" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=120;fontFamily=Raleway;fontStyle=1;fontColor=#00CC00;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRaleway;" parent="1" vertex="1">
           <mxGeometry x="120" y="40" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="j0SVLzz-3dvo6EfwO2ZV-3" value="R" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=120;fontFamily=Courier New;fontStyle=1;fontColor=#CC0000;" vertex="1" parent="1">
+        <mxCell id="j0SVLzz-3dvo6EfwO2ZV-3" value="R" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=120;fontFamily=Raleway;fontStyle=1;fontColor=#CC0000;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRaleway;" parent="1" vertex="1">
           <mxGeometry x="200" y="40" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="j0SVLzz-3dvo6EfwO2ZV-4" value="S" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=120;fontFamily=Courier New;fontStyle=1;fontColor=#CCCC00;" vertex="1" parent="1">
+        <mxCell id="j0SVLzz-3dvo6EfwO2ZV-4" value="S" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=120;fontFamily=Raleway;fontStyle=1;fontColor=#CCCC00;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRaleway;" parent="1" vertex="1">
           <mxGeometry x="280" y="40" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="j0SVLzz-3dvo6EfwO2ZV-5" value="+" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=120;fontFamily=Courier New;fontStyle=1;fontColor=#CC00CC;" vertex="1" parent="1">
+        <mxCell id="j0SVLzz-3dvo6EfwO2ZV-5" value="+" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=210;fontFamily=Raleway;fontStyle=1;fontColor=#CC00CC;strokeWidth=1;fillColor=none;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRaleway;" parent="1" vertex="1">
           <mxGeometry x="360" y="40" width="80" height="80" as="geometry" />
         </mxCell>
       </root>
