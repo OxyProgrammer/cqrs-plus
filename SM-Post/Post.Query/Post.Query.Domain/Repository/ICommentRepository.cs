@@ -8,7 +8,7 @@ namespace Post.Query.Domain.Repository
 
         Task UpdateAsync(CommentEntity comment);
 
-        Task<PostEntity> GetByIdAsync(Guid commentId);
+        Task<CommentEntity> GetByIdAsync(Guid commentId);
 
         Task DeleteAsync(Guid commentId);
     }
