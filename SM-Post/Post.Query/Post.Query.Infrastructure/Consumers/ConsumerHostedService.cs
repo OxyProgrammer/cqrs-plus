@@ -25,7 +25,7 @@ namespace Post.Query.Infrastructure.Consumers
                 var eventConsumer = scope.ServiceProvider.GetService<IEventConsumer>();
                 var topic = Environment.GetEnvironmentVariable("KAFKA_TOPIC");
 
-                Task.Run(() => eventConsumer.Consume(topic), cancellationToken);
+                Task.Run(() => eventConsumer.Consume(topic, cancellationToken), cancellationToken);
             }
 
             return Task.CompletedTask;

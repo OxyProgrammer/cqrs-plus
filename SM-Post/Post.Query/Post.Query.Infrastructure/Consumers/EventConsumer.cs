@@ -19,7 +19,7 @@ namespace Post.Query.Infrastructure.Consumers
             _eventHandler = eventHandler;
         }
 
-        public void Consume(string topic)
+        public void Consume(string topic, CancellationToken cancellationToken)
         {
             using var consumer = new ConsumerBuilder<string, string>(_config).SetKeyDeserializer(Deserializers.Utf8).SetValueDeserializer(Deserializers.Utf8).Build();
 
@@ -27,23 +27,41 @@ namespace Post.Query.Infrastructure.Consumers
 
             while (true)
             {
-                var consumeResult = consumer.Consume();
-                if (consumeResult?.Message == null)
+                var allowUnknownTopic = true;
+
+                while (!cancellationToken.IsCancellationRequested)
                 {
-                    continue;
+                    try
+                    {
+                        var consumeResult = consumer.Consume(cancellationToken);
+
+                        if (consumeResult?.Message == null)
+                        {
+                            continue;
+                        }
+
+                        var options = new JsonSerializerOptions { Converters = { new EventJsonConverter() } };
+                        var @event = JsonSerializer.Deserialize<BaseEvent>(consumeResult.Message.Value, options);
+                        var handlerMethod = _eventHandler.GetType().GetMethod("On", new Type[] { @event.GetType() });
+
+                        if (handlerMethod == null)
+                        {
+                            throw new ArgumentNullException(nameof(handlerMethod), "Could not find event handler method!");
+                        }
+
+                        handlerMethod.Invoke(_eventHandler, new object[] { @event });
+                        consumer.Commit(consumeResult);
+                    }
+                    catch (Exception e)
+                    {
+                        // TODO This accounts for a kafka client bug where allow.auto.create.topics is true, but Consume still throws the first try
+                        if ((_config.AllowAutoCreateTopics.HasValue && _config.AllowAutoCreateTopics.Value)
+                            && allowUnknownTopic && !e.Message.Equals("Broker: Unknown topic or partition"))
+                            throw;
+
+                        allowUnknownTopic = false;
+                    }
                 }
-
-                var options = new JsonSerializerOptions { Converters = { new EventJsonConverter() } };
-                var @event = JsonSerializer.Deserialize<BaseEvent>(consumeResult.Message.Value, options);
-                var handlerMethod = _eventHandler.GetType().GetMethod("On", new Type[] { @event.GetType() });
-
-                if (handlerMethod == null)
-                {
-                    throw new ArgumentNullException(nameof(handlerMethod), "Could not find event handler method!");
-                }
-
-                handlerMethod.Invoke(_eventHandler, new object[] { @event });
-                consumer.Commit(consumeResult);
             }
         }
     }
