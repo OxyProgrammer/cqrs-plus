@@ -7,7 +7,7 @@ using Post.Common.DTOs;
 namespace Post.Cmd.Api.Controllers
 {
     [ApiController]
-    [Route("api/v1/{controller}")]
+    [Route("api/v1/newpost")]
     public class NewPostController : ControllerBase
     {
         private ILogger<NewPostController> _logger;

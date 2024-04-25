@@ -52,7 +52,11 @@ namespace Post.Query.Infrastructure.Consumers
                             throw new ArgumentNullException(nameof(handlerMethod), "Could not find event handler method!");
                         }
 
-                        handlerMethod.Invoke(_eventHandler, new object[] { @event });
+                        var task = (Task)handlerMethod.Invoke(_eventHandler, new[] { @event });
+
+                        //await task.ConfigureAwait(false);
+                        task.GetAwaiter().GetResult();
+
                         consumer.Commit(consumeResult);
                     }
                     catch (Exception e)

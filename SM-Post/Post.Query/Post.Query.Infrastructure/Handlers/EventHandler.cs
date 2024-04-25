@@ -20,7 +20,7 @@ namespace Post.Query.Infrastructure.Handlers
                 PostId = @event.Id,
                 Author = @event.Author,
                 Message = @event.Message,
-                DatePosted = @event.DatePosted
+                DatePosted = @event.DatePosted.ToUniversalTime(),
             };
             await _postRepository.CreateAsync(post);
         }

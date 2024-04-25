@@ -1,56 +1,6 @@
 version: "3.8"
  
 services:
-  # zookeeper:
-  #   image: bitnami/zookeeper
-  #   restart: always
-  #   ports:
-  #     - "2181:2181"
-  #   volumes:
-  #     - "zookeeper_data:/bitnami"
-  #   environment:
-  #     - ALLOW_ANONYMOUS_LOGIN=yes
-  # kafka:
-  #   image: bitnami/kafka
-  #   ports:
-  #     - "9092:9092"
-  #   restart: always
-  #   volumes:
-  #     - "kafka_data:/bitnami"
-  #   environment:
-  #     - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
-  #     - ALLOW_PLAINTEXT_LISTENER=yes
-  #     - KAFKA_LISTENERS=PLAINTEXT://:9092
-  #     - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
-  #     - KAFKA_AUTO_CREATE_TOPICS_ENABLE=false
-  #   depends_on:
-  #     - zookeeper
-  # zookeeper:
-  #   image: confluentinc/cp-zookeeper:latest
-  #   environment:
-  #     ZOOKEEPER_CLIENT_PORT: 2181
-  #     ZOOKEEPER_TICK_TIME: 2000
-  #   ports:
-  #     - 22181:2181
-
-  # kafka:
-  #   image: confluentinc/cp-kafka:latest
-  #   depends_on:
-  #     - zookeeper
-  #   ports:
-  #     - 29092:29092
-  #   expose:
-  #     - 29092
-  #   environment:
-  #     KAFKA_BROKER_ID: 1
-  #     KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-  #     KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
-  #     KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-  #     KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-  #     KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-
-
-
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     ports:
@@ -90,15 +40,6 @@ services:
       echo -e 'Successfully created the following topics:'
       kafka-topics --bootstrap-server kafka:29092 --list
       "
-  sqlserver:
-    image: "mcr.microsoft.com/mssql/server:2022-latest"
-    environment:
-      ACCEPT_EULA: "Y"
-      MSSQL_SA_PASSWORD: "Password123"
-      MSSQL_PID: "Express"
-    ports:
-      - "14330:1433"
-    restart: always
   mongo-container:
     container_name: mongo-container
     image: mongo:latest
@@ -107,13 +48,22 @@ services:
     volumes:
       - "mongodb_data_container:/data/db"
     restart: always
- 
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=postgrespw
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
 volumes:
   zookeeper_data:
     driver: local
   kafka_data:
     driver: local
   mongodb_data_container:
+    driver: local
+  pgdata:
     driver: local
    
 networks:
