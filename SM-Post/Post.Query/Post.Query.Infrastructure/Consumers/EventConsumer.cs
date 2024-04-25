@@ -21,7 +21,10 @@ namespace Post.Query.Infrastructure.Consumers
 
         public void Consume(string topic, CancellationToken cancellationToken)
         {
-            using var consumer = new ConsumerBuilder<string, string>(_config).SetKeyDeserializer(Deserializers.Utf8).SetValueDeserializer(Deserializers.Utf8).Build();
+            using var consumer = new ConsumerBuilder<string, string>(_config)
+                .SetKeyDeserializer(Deserializers.Utf8)
+                .SetValueDeserializer(Deserializers.Utf8)
+                .Build();
 
             consumer.Subscribe(topic);
 
