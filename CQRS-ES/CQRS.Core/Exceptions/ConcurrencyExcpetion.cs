@@ -16,9 +16,5 @@ namespace CQRS.Core.Exceptions
         public ConcurrencyExcpetion(string message, Exception innerException) : base(message, innerException)
         {
         }
-
-        protected ConcurrencyExcpetion(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
     }
 }

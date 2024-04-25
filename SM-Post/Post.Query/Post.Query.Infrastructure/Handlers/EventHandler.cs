@@ -53,7 +53,7 @@ namespace Post.Query.Infrastructure.Handlers
                 CommentId = @event.CommentId,
                 Comment = @event.Comment,
                 Username = @event.Username,
-                CommentDate = @event.CommentDate,
+                CommentDate = @event.CommentDate.ToUniversalTime(),
                 Edited = false
             };
             await _commentRepository.UpdateAsync(comment);
@@ -69,7 +69,7 @@ namespace Post.Query.Infrastructure.Handlers
             }
             comment.Comment = @event.Comment;
             comment.Edited = true;
-            comment.CommentDate = @event.EditDate;
+            comment.CommentDate = @event.EditDate.ToUniversalTime();
             await _commentRepository.UpdateAsync(comment);
         }
 

@@ -16,9 +16,5 @@ namespace CQRS.Core.Exceptions
         public AggregateNotFoundException(string message, Exception innerException) : base(message, innerException)
         {
         }
-
-        protected AggregateNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
     }
 }
