@@ -8,19 +8,19 @@ namespace Post.Cmd.Api.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class EditPostController : ControllerBase
+    public class EditCommentController : ControllerBase
     {
-        private ILogger<EditPostController> _logger;
+        private ILogger<EditCommentController> _logger;
         private ICommandDispatcher _commandDispatcher;
 
-        public EditPostController(ILogger<EditPostController> logger, ICommandDispatcher commandDispatcher)
+        public EditCommentController(ILogger<EditCommentController> logger, ICommandDispatcher commandDispatcher)
         {
             _logger = logger;
             _commandDispatcher = commandDispatcher;
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> EditMessageAsync(Guid id, EditMessageCommand command)
+        public async Task<ActionResult> EditCommentAsync(Guid id, EditCommentCommand command)
         {
             try
             {
@@ -29,7 +29,7 @@ namespace Post.Cmd.Api.Controllers
 
                 return Ok(new BaseResponse
                 {
-                    Message = "Edit message request completed successfully."
+                    Message = "Edit comment request completed successfully."
                 });
             }
             catch (InvalidOperationException ex)
@@ -50,7 +50,7 @@ namespace Post.Cmd.Api.Controllers
             }
             catch (Exception ex)
             {
-                const string SAFE_ERROR_MESSAGE = "Error while processing request to edit message of a post.";
+                const string SAFE_ERROR_MESSAGE = "Error while processing request to edit comment to a post.";
                 _logger.Log(LogLevel.Error, ex, SAFE_ERROR_MESSAGE);
                 return StatusCode(StatusCodes.Status500InternalServerError, new BaseResponse { Message = SAFE_ERROR_MESSAGE });
             }

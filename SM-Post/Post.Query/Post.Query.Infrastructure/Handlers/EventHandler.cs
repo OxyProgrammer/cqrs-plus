@@ -56,7 +56,7 @@ namespace Post.Query.Infrastructure.Handlers
                 CommentDate = @event.CommentDate.ToUniversalTime(),
                 Edited = false
             };
-            await _commentRepository.UpdateAsync(comment);
+            await _commentRepository.CreateAsync(comment);
 
         }
 
