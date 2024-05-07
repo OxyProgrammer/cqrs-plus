@@ -2,6 +2,7 @@ using Confluent.Kafka;
 using CQRS.Core.Consumers;
 using Microsoft.EntityFrameworkCore;
 using Post.Query.Api.Extensions;
+using Post.Query.Api.Queries;
 using Post.Query.Domain.Repository;
 using Post.Query.Infrastructure.Consumers;
 using Post.Query.Infrastructure.DataAccess;
@@ -19,6 +20,8 @@ builder.Services.AddSingleton<DatabaseContextFactory>(new DatabaseContextFactory
 
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<IQueryHandler, QueryHandler>();
+builder.Services.ConfigureQueryHandlers();
 builder.Services.AddScoped<IEventHandler, Post.Query.Infrastructure.Handlers.EventHandler>();
 builder.Services.Configure<ConsumerConfig>(builder.Configuration.GetSection(nameof(ConsumerConfig)));
 builder.Services.AddScoped<IEventConsumer, EventConsumer>();
