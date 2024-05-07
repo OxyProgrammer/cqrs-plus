@@ -27,6 +27,16 @@ namespace Post.Cmd.Infrastructure.Stores
             return eventStream.OrderBy(e => e.Version).Select(e => e.EventData).ToList();
         }
 
+        public async Task<List<Guid>> GetAggregateIdsAsync()
+        {
+            var eventStream = await _eventStoreRepository.FindAllAsync();
+            if (eventStream == null || !eventStream.Any())
+            {
+                throw new ArgumentNullException("Could not retrieve event stream from event store.");
+            }
+            return eventStream.Select(x => x.AggregateIdentifier).Distinct().ToList();
+        }
+
         public async Task SaveEventAsync(Guid aggregateId, IEnumerable<BaseEvent> events, int expectedVersion)
         {
             var eventStream = await _eventStoreRepository.FindByAggregateId(aggregateId);

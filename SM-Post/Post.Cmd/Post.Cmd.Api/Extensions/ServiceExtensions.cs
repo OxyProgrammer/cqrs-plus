@@ -22,6 +22,7 @@ namespace Post.Cmd.Api.Extensions
                 dispatcher.RegisterHandler<EditCommentCommand>(commandHandler.HandleAsync);
                 dispatcher.RegisterHandler<RemoveCommentCommand>(commandHandler.HandleAsync);
                 dispatcher.RegisterHandler<DeletePostCommand>(commandHandler.HandleAsync);
+                dispatcher.RegisterHandler<RestoreReadDbCommand>(commandHandler.HandleAsync);
 
                 services.AddSingleton<ICommandDispatcher>(_ => dispatcher);
             }
