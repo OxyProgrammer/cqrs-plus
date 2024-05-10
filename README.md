@@ -25,8 +25,8 @@
 
 ## About The Project
 
-This repository contains a comprehensive CQRS implementation for a distributed environment. The code demonstrates a polyglot microservices application that implements Command Query Responsibility Segregation using Event Sourcing.
-CQRS Plus uses a variety of technologies.
+This repository contains a comprehensive CQRS implementation for a distributed environment. The code demonstrates a microservices application that implements Command Query Responsibility Segregation using Event Sourcing.
+CQRS with Event Sourcing.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
