@@ -82,9 +82,66 @@ CQRS Plus uses a variety of technologies.
 
 ## Setup
 
-You will need docker desktop on your machine to be able to run this repo.
+You will need docker desktop on your machine to be able to run this repo. There are two ways in which you could run the repo:
 
-Instructions to to published soon.
+#### Using Visual Sudio Debugger
+
+- Clone the repository to your local machine:
+
+  ```
+  git clone https://github.com/OxyProgrammer/cqrs-plus.git
+  ```
+- Navigate to the project directory:
+
+  ```
+  cd cqrs-plus
+  ```
+- You will need Kafka, MongoDb and PostgreSql instances running for the two services to work. Fire the following docker-compose command to start the containers:
+  ```
+  docker-compose -f docker-compose.debug.yaml up -d
+  ```
+
+- Open the solution file in visual studio and configure the two api projects as start up project:
+  <p align="center">
+    <img src="Images/project-start-setup.png" alt="Multiple Start up project" />
+  </p>
+
+- Run the solution and you should be able to see the two swagger pages opening up! 
+  <p align="center">
+    <img src="Images/swagger.png" alt="Multiple Start up project" />
+  </p>
+
+- The docker containers running should be shut down with following command:
+
+  ```
+  docker-compose -f docker-compose.debug.yaml down
+  ```
+
+#### Using Docker desktop only
+
+- Clone the repository to your local machine:
+
+  ```
+  git clone https://github.com/OxyProgrammer/cqrs-plus.git
+  ```
+
+- Navigate to the project directory:
+
+  ```
+  cd cqrs-plus
+  ```
+
+- Build the images of the projects:
+  ```
+  docker-compose build
+  ```
+
+- Run the docker compose:
+  ```
+  docker-compose up -d
+  ```
+
+- Use the postman collection located here to run requests.
 
 ## Contributing
 

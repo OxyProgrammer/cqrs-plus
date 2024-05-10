@@ -1,0 +1,329 @@
+{
+	"info": {
+		"_postman_id": "24897d95-fd64-4f7b-a095-2a90fdb47b8b",
+		"name": "CQRSPlus",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31804780"
+	},
+	"item": [
+		{
+			"name": "AddPost",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"author\": \"James\",\r\n  \"message\": \"New post in Docker\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/newpost",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"newpost"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EditPost",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"message\": \"Completing the docker cqrs.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/editpost/458e8af0-f8c2-49e7-89d0-5be7e55e2faa",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"editpost",
+						"458e8af0-f8c2-49e7-89d0-5be7e55e2faa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllPosts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5001/api/v1/postlookup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"v1",
+						"postlookup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPostById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5001/api/v1/postlookup/byid/37133e01-8310-4038-ab4e-d56272186695",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"v1",
+						"postlookup",
+						"byid",
+						"37133e01-8310-4038-ab4e-d56272186695"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPostsByAuthor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5001/api/v1/postlookup/byauthor/James",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"v1",
+						"postlookup",
+						"byauthor",
+						"James"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPostsWithLikes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5001/api/v1/postlookup/withcomments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"v1",
+						"postlookup",
+						"withcomments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPostsWithLikes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5001/api/v1/postlookup/withlikes/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"v1",
+						"postlookup",
+						"withlikes",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LikePost",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/likepost/458e8af0-f8c2-49e7-89d0-5be7e55e2faa",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"likepost",
+						"458e8af0-f8c2-49e7-89d0-5be7e55e2faa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddCommentToPost",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"comment\": \"I dont like this post\",\r\n  \"username\": \"Grumpy guy\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/addcomment/458e8af0-f8c2-49e7-89d0-5be7e55e2faa",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"addcomment",
+						"458e8af0-f8c2-49e7-89d0-5be7e55e2faa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EditComment",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"commentId\":\"1ef0b7cb-a661-4d3e-afcd-64a23408f8d7\",\r\n  \"comment\": \"I don't like this post.[Edit: Corrected missing apostrophe]\",\r\n  \"username\": \"Grumpy guy\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/editcomment/458e8af0-f8c2-49e7-89d0-5be7e55e2faa",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"editcomment",
+						"458e8af0-f8c2-49e7-89d0-5be7e55e2faa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RemoveComment",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"commentId\":\"aa593db5-eb17-4a93-b6c2-0412d1284430\",\r\n  \"username\": \"Grumpy guy\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/removecomment/458e8af0-f8c2-49e7-89d0-5be7e55e2faa",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"removecomment",
+						"458e8af0-f8c2-49e7-89d0-5be7e55e2faa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeletePost",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":\"458e8af0-f8c2-49e7-89d0-5be7e55e2faa\",\r\n    \"username\":\"James\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/deletepost/458e8af0-f8c2-49e7-89d0-5be7e55e2faa",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"deletepost",
+						"458e8af0-f8c2-49e7-89d0-5be7e55e2faa"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
