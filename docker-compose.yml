@@ -41,13 +41,13 @@ services:
       kafka-topics --bootstrap-server kafka:29092 --list
       "
   mongo-container:
-    container_name: mongo-container
     image: mongo:latest
     ports:
       - "27017:27017"
     volumes:
       - "mongodb_data_container:/data/db"
     restart: always
+  
   postgres:
     image: postgres
     environment:
@@ -56,6 +56,37 @@ services:
       - 5432:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
+      
+  command-svc:
+    image: oxyprogrammer/command-svc:latest
+    build:
+      context: .
+      dockerfile: Post.Cmd/Post.Cmd.Api/Dockerfile
+    ports:
+      - "5000:8080"  # Map port 5000 on host to port 8080 in the container
+    networks:
+      - default
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - KAFKA_TOPIC=SocialMediaTopic
+    depends_on:
+      - mongo-container  
+
+  lookup-svc:
+    image: oxyprogrammer/lookup-svc:latest
+    build:
+      context: .
+      dockerfile: Post.Query/Post.Query.Api/Dockerfile
+    ports:
+      - "5001:8080"  # Map port 5000 on host to port 8080 in the container
+    networks:
+      - default
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - KAFKA_TOPIC=SocialMediaTopic
+    depends_on:
+      - postgres  
+
 volumes:
   zookeeper_data:
     driver: local
