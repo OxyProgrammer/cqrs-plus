@@ -38,6 +38,7 @@ CQRS Plus uses a variety of technologies.
   <img height='128px' width='128px' src="Images/kafkaLogo.png" alt="Kafka Logo" />
   <img height='128px' width='128px' src="Images/postgresqlLogo.png" alt="Postgre Logo" />
   <img height='128px' width='128px' src="Images/mongodbLogo.png" alt="MongoDb Logo" />
+  <img height='128px' width='128px' src="Images/dockerLogo.png" alt="Docker Logo" />
 </p>
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -141,7 +142,7 @@ You will need docker desktop on your machine to be able to run this repo. There 
   docker-compose up -d
   ```
 
-- Use the postman collection located here to run requests.
+- Use the postman collection located [here](https://github.com/OxyProgrammer/cqrs-plus/blob/main/PostmanCollection/CQRSPlus.postman_collection.json) to run requests.
 
 ## Contributing
 
