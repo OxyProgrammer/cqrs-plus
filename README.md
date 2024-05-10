@@ -34,11 +34,7 @@ CQRS Plus uses a variety of technologies.
 
 <br/>
 <p align="center">
-  <img height='128px' width='128px' src="Images/csharpLogo.png" alt="CSharp Logo" />
-  <img height='128px' width='128px' src="Images/kafkaLogo.png" alt="Kafka Logo" />
-  <img height='128px' width='128px' src="Images/postgresqlLogo.png" alt="Postgre Logo" />
-  <img height='128px' width='128px' src="Images/mongodbLogo.png" alt="MongoDb Logo" />
-  <img height='128px' width='128px' src="Images/dockerLogo.png" alt="Docker Logo" />
+  <img width='full' src="Images/tech-logos.png" alt="Technology Logos" />
 </p>
 <p align="right">(<a href="#top">back to top</a>)</p>
 
