@@ -26,7 +26,6 @@
 ## About The Project
 
 This repository contains a comprehensive CQRS implementation for a distributed environment. The code demonstrates a microservices application that implements Command Query Responsibility Segregation using Event Sourcing.
-CQRS with Event Sourcing.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
