@@ -174,6 +174,6 @@ If you have any questions, suggestions, or issues, please feel free to contact t
 
 OxyProgrammer - oxyprogrammer@gmail.com
 
-Project Link: [https://github.com/OxyProgrammer/aspnet-plus](https://github.com/OxyProgrammer/aspnet-plus)
+Project Link: [https://github.com/OxyProgrammer/cqrs-plus](https://github.com/OxyProgrammer/cqrs-plus)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
