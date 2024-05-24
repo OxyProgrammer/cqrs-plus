@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using CQRS.Core.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Post.Cmd.Api.Commands;
@@ -10,7 +10,7 @@ namespace Post.Cmd.Api.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class PostController : ControllerBase
+    public class PostsController : ControllerBase
     {
         private readonly ILogger<PostController> _logger;
         private readonly ICommandDispatcher _commandDispatcher;
