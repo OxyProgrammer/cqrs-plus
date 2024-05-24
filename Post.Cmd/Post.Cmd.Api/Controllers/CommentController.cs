@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using CQRS.Core.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Post.Cmd.Api.Commands;
@@ -8,7 +8,7 @@ using Post.Common.DTOs;
 namespace Post.Cmd.Api.Controllers
 {
     [ApiController]
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/post/{postId}/[controller]")]
     public class CommentController : ControllerBase
     {
         private readonly ILogger<CommentController> _logger;
