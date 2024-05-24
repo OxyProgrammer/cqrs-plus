@@ -8,8 +8,8 @@ using Post.Common.DTOs;
 namespace Post.Cmd.Api.Controllers
 {
     [ApiController]
-    [Route("api/v1/post/{postId}/[controller]")]
-    public class CommentController : ControllerBase
+    [Route("api/v1/posts/{postId}/[controller]")]
+    public class CommentsController : ControllerBase
     {
         private readonly ILogger<CommentController> _logger;
         private readonly ICommandDispatcher _commandDispatcher;
