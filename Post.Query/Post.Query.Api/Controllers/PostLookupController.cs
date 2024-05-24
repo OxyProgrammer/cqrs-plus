@@ -1,6 +1,5 @@
 ﻿using CQRS.Core.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
-using Post.Common.DTOs;
 using Post.Query.Api.DTOs;
 using Post.Query.Api.Queries;
 using Post.Query.Domain.Entities;
@@ -23,81 +22,36 @@ namespace Post.Query.Api.Controllers
         [HttpGet]
         public async Task<ActionResult> GetAllPostsAsync()
         {
-            try
-            {
-                var posts = await _queryDispatcher.SendAsync(new FindAllPostQuery());
-
-                return NormalResponse(posts);
-            }
-            catch (Exception ex)
-            {
-                const string SAFE_ERROR_MESSAGE = "Error while processing request to retrieve all posts";
-                return ErrorResponse(ex, SAFE_ERROR_MESSAGE);
-            }
+            var posts = await _queryDispatcher.SendAsync(new FindAllPostQuery());
+            return NormalResponse(posts);
         }
 
-        [HttpGet("byId/{postId}")]
+        [HttpGet("byId/{postId:guid}")]
         public async Task<ActionResult> GetPostByIdAsync(Guid postId)
         {
-            try
-            {
-                var posts = await _queryDispatcher.SendAsync(new FindPostByIdQuery { Id = postId });
-
-                return NormalResponse(posts);
-            }
-            catch (Exception ex)
-            {
-                const string SAFE_ERROR_MESSAGE = "Error while processing request to find post by id.";
-                return ErrorResponse(ex, SAFE_ERROR_MESSAGE);
-            }
+            var posts = await _queryDispatcher.SendAsync(new FindPostByIdQuery { Id = postId });
+            return NormalResponse(posts);
         }
 
-        [HttpGet("byAuthor/{author}")]
+        [HttpGet("byAuthor/{author:string}")]
         public async Task<ActionResult> GetPostsByAuthorAsync(string author)
         {
-            try
-            {
-                var posts = await _queryDispatcher.SendAsync(new FindPostsByAuthorQuery { Author = author });
-
-                return NormalResponse(posts);
-            }
-            catch (Exception ex)
-            {
-                const string SAFE_ERROR_MESSAGE = "Error while processing request to find posts by author.";
-                return ErrorResponse(ex, SAFE_ERROR_MESSAGE);
-            }
+            var posts = await _queryDispatcher.SendAsync(new FindPostsByAuthorQuery { Author = author });
+            return NormalResponse(posts);
         }
 
         [HttpGet("withComments")]
         public async Task<ActionResult> GetPostsWithCommentsAsync()
         {
-            try
-            {
-                var posts = await _queryDispatcher.SendAsync(new FindPostsWithCommentsQuery());
-
-                return NormalResponse(posts);
-            }
-            catch (Exception ex)
-            {
-                const string SAFE_ERROR_MESSAGE = "Error while processing request to find posts by author.";
-                return ErrorResponse(ex, SAFE_ERROR_MESSAGE);
-            }
+            var posts = await _queryDispatcher.SendAsync(new FindPostsWithCommentsQuery());
+            return NormalResponse(posts);
         }
 
-        [HttpGet("withLikes/{numberOfLikes}")]
+        [HttpGet("withLikes/{numberOfLikes:int}")]
         public async Task<ActionResult> GetPostsWithLikesAsync(int numberOfLikes)
         {
-            try
-            {
-                var posts = await _queryDispatcher.SendAsync(new FindPostsWithLikesQuery { NumberOfLikes = numberOfLikes });
-
-                return NormalResponse(posts);
-            }
-            catch (Exception ex)
-            {
-                const string SAFE_ERROR_MESSAGE = "Error while processing request to find posts with likes.";
-                return ErrorResponse(ex, SAFE_ERROR_MESSAGE);
-            }
+            var posts = await _queryDispatcher.SendAsync(new FindPostsWithLikesQuery { NumberOfLikes = numberOfLikes });
+            return NormalResponse(posts);
         }
 
         private ActionResult NormalResponse(List<PostEntity> posts)
@@ -106,16 +60,9 @@ namespace Post.Query.Api.Controllers
             {
                 return NoContent();
             }
-
             var count = posts.Count();
-
             return Ok(new PostLookupResponse() { Posts = posts, Message = $"Successfully returned {count} post{(count > 1 ? 's' : string.Empty)}" });
         }
 
-        private ActionResult ErrorResponse(Exception ex, string safeErrorMessage)
-        {
-            _logger.LogError(ex, safeErrorMessage);
-            return StatusCode(StatusCodes.Status500InternalServerError, new BaseResponse { Message = safeErrorMessage });
-        }
     }
 }

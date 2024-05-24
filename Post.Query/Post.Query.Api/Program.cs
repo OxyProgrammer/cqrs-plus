@@ -1,6 +1,7 @@
 using Confluent.Kafka;
 using CQRS.Core.Consumers;
 using Microsoft.EntityFrameworkCore;
+using Post.Query.Api;
 using Post.Query.Api.Extensions;
 using Post.Query.Api.Queries;
 using Post.Query.Domain.Repository;
@@ -25,6 +26,7 @@ builder.Services.ConfigureQueryHandlers();
 builder.Services.AddScoped<IEventHandler, Post.Query.Infrastructure.Handlers.EventHandler>();
 builder.Services.Configure<ConsumerConfig>(builder.Configuration.GetSection(nameof(ConsumerConfig)));
 builder.Services.AddScoped<IEventConsumer, EventConsumer>();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 builder.Services.AddControllers();
 
