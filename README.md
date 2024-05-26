@@ -139,9 +139,7 @@ You will need docker desktop on your machine to be able to run this repo. There 
   docker-compose up -d
   ```
 
-- Use the postman collection located [here](https://github.com/OxyProgrammer/cqrs-plus/blob/main/PostmanCollection/CQRSPlus.postman_collection.json) to run requests. Alternatively, you can access the swagger page to test the services:
-  - Command Service: [http://localhost:5000/swagger/index.html](http://localhost:5000/swagger/index.html)
-  - LookUp Service: [http://localhost:5001/swagger/index.html](http://localhost:5001/swagger/index.html)
+- You will be able to access the command and lookup service using gateway only. Use the postman collection located [here](https://github.com/OxyProgrammer/cqrs-plus/blob/main/PostmanCollection/CQRSPlus.postman_collection.json) to run requests.
 
 
 ## Contributing
