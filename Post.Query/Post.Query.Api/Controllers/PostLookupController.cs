@@ -10,12 +10,10 @@ namespace Post.Query.Api.Controllers
     [Route("api/v1/[controller]")]
     public class PostLookupController : ControllerBase
     {
-        private readonly ILogger<PostLookupController> _logger;
         private readonly IQueryDispatcher<PostEntity> _queryDispatcher;
 
-        public PostLookupController(ILogger<PostLookupController> logger, IQueryDispatcher<PostEntity> queryDispatcher)
+        public PostLookupController(IQueryDispatcher<PostEntity> queryDispatcher)
         {
-            _logger = logger;
             _queryDispatcher = queryDispatcher;
         }
 

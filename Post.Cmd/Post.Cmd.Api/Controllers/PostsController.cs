@@ -31,9 +31,7 @@ namespace Post.Cmd.Api.Controllers
             var id = Guid.NewGuid();
             var command = _mapper.Map<NewPostCommand>(newPostDto);
             command.Id = id;
-
             await _commandDispatcher.SendAsync(command);
-
             return StatusCode(StatusCodes.Status201Created, new NewPostResponseDto { Id = id, Message = "New post creation completed successfully." });
         }
 
@@ -49,7 +47,6 @@ namespace Post.Cmd.Api.Controllers
             var command = _mapper.Map<EditPostCommand>(editPostDto);
             command.Id = id;
             await _commandDispatcher.SendAsync(command);
-
             return Ok("Edit message request completed successfully.");
         }
 
@@ -62,7 +59,6 @@ namespace Post.Cmd.Api.Controllers
         public async Task<ActionResult> LikePostAsync(Guid id)
         {
             await _commandDispatcher.SendAsync(new LikePostCommand { Id = id });
-
             return Ok("Like post request completed successfully.");
         }
 
@@ -75,7 +71,7 @@ namespace Post.Cmd.Api.Controllers
         [HttpDelete("{id:guid}")]
         public async Task<ActionResult> DeletePostAsync(Guid id, [FromBody] DeletePostDto deletePostDto)
         {
-            DeletePostCommand command = new DeletePostCommand { Id = id, Username = deletePostDto.Username };
+            var command = new DeletePostCommand { Id = id, Username = deletePostDto.Username };
             await _commandDispatcher.SendAsync(command);
             return Ok("Delete post request completed successfully.");
         }

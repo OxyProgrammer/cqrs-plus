@@ -63,7 +63,7 @@ services:
       context: .
       dockerfile: Post.Cmd/Post.Cmd.Api/Dockerfile
     ports:
-      - "5000:8080"  # Map port 5000 on host to port 8080 in the container
+     - "5001:8080"  # map port 5001 on host to port 8080 in the container
     networks:
       - default
     environment:
@@ -78,7 +78,7 @@ services:
       context: .
       dockerfile: Post.Query/Post.Query.Api/Dockerfile
     ports:
-      - "5001:8080"  # Map port 5000 on host to port 8080 in the container
+      - "5002:8080"  # Map port 5002 on host to port 8080 in the container
     networks:
       - default
     environment:
@@ -87,6 +87,21 @@ services:
     depends_on:
       - postgres  
 
+  gateway-svc:
+    image: oxyprogrammer/gateway-svc:latest
+    build:
+      context: .
+      dockerfile: CQRS.Gateway/Dockerfile
+    ports:
+      - "5000:8080"  # Map port 5000 on host to port 8080 in the container
+    networks:
+      - default
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    depends_on:
+      - lookup-svc
+      - command-svc
+      
 volumes:
   zookeeper_data:
     driver: local
