@@ -21,7 +21,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/api/v1/newpost",
+					"raw": "http://localhost:5000/api/v1/posts",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -30,7 +30,7 @@
 					"path": [
 						"api",
 						"v1",
-						"newpost"
+						"posts"
 					]
 				}
 			},
@@ -43,7 +43,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"message\": \"Completing the docker cqrs.\"\r\n}",
+					"raw": "{\r\n  \"message\": \"[Edited]: Put some new post here!\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -51,7 +51,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/api/v1/editpost/458e8af0-f8c2-49e7-89d0-5be7e55e2faa",
+					"raw": "http://localhost:5000/api/v1/posts/35f42a26-1a67-4a10-ba71-fd03cb228f10",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -60,8 +60,8 @@
 					"path": [
 						"api",
 						"v1",
-						"editpost",
-						"458e8af0-f8c2-49e7-89d0-5be7e55e2faa"
+						"posts",
+						"35f42a26-1a67-4a10-ba71-fd03cb228f10"
 					]
 				}
 			},
@@ -73,12 +73,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5001/api/v1/postlookup",
+					"raw": "http://localhost:5000/api/v1/postlookup",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5001",
+					"port": "5000",
 					"path": [
 						"api",
 						"v1",
@@ -94,12 +94,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5001/api/v1/postlookup/byid/37133e01-8310-4038-ab4e-d56272186695",
+					"raw": "http://localhost:5000/api/v1/postlookup/byid/37133e01-8310-4038-ab4e-d56272186695",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5001",
+					"port": "5000",
 					"path": [
 						"api",
 						"v1",
@@ -117,12 +117,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5001/api/v1/postlookup/byauthor/James",
+					"raw": "http://localhost:5000/api/v1/postlookup/byauthor/James",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5001",
+					"port": "5000",
 					"path": [
 						"api",
 						"v1",
@@ -135,17 +135,17 @@
 			"response": []
 		},
 		{
-			"name": "GetPostsWithLikes",
+			"name": "GetPostsWithComments",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5001/api/v1/postlookup/withcomments",
+					"raw": "http://localhost:5000/api/v1/postlookup/withcomments",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5001",
+					"port": "5000",
 					"path": [
 						"api",
 						"v1",
@@ -162,12 +162,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5001/api/v1/postlookup/withlikes/3",
+					"raw": "http://localhost:5000/api/v1/postlookup/withlikes/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5001",
+					"port": "5000",
 					"path": [
 						"api",
 						"v1",
@@ -185,7 +185,7 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/api/v1/likepost/458e8af0-f8c2-49e7-89d0-5be7e55e2faa",
+					"raw": "http://localhost:5000/api/v1/posts/like/35f42a26-1a67-4a10-ba71-fd03cb228f10",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -194,8 +194,9 @@
 					"path": [
 						"api",
 						"v1",
-						"likepost",
-						"458e8af0-f8c2-49e7-89d0-5be7e55e2faa"
+						"posts",
+						"like",
+						"35f42a26-1a67-4a10-ba71-fd03cb228f10"
 					]
 				}
 			},
@@ -216,7 +217,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/api/v1/addcomment/458e8af0-f8c2-49e7-89d0-5be7e55e2faa",
+					"raw": "http://localhost:5000/api/v1/posts/35f42a26-1a67-4a10-ba71-fd03cb228f10/comments",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -225,8 +226,9 @@
 					"path": [
 						"api",
 						"v1",
-						"addcomment",
-						"458e8af0-f8c2-49e7-89d0-5be7e55e2faa"
+						"posts",
+						"35f42a26-1a67-4a10-ba71-fd03cb228f10",
+						"comments"
 					]
 				}
 			},
@@ -239,7 +241,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"commentId\":\"1ef0b7cb-a661-4d3e-afcd-64a23408f8d7\",\r\n  \"comment\": \"I don't like this post.[Edit: Corrected missing apostrophe]\",\r\n  \"username\": \"Grumpy guy\"\r\n}",
+					"raw": "{\r\n  \"comment\": \"I don't like this post.[Edit: Corrected missing apostrophe]\",\r\n  \"username\": \"Grumpy guy\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -247,7 +249,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/api/v1/editcomment/458e8af0-f8c2-49e7-89d0-5be7e55e2faa",
+					"raw": "http://localhost:5000/api/v1/posts/35f42a26-1a67-4a10-ba71-fd03cb228f10/comments/0e77252d-91a7-4b84-8da9-5fc5374893bf",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -256,8 +258,10 @@
 					"path": [
 						"api",
 						"v1",
-						"editcomment",
-						"458e8af0-f8c2-49e7-89d0-5be7e55e2faa"
+						"posts",
+						"35f42a26-1a67-4a10-ba71-fd03cb228f10",
+						"comments",
+						"0e77252d-91a7-4b84-8da9-5fc5374893bf"
 					]
 				}
 			},
@@ -270,7 +274,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"commentId\":\"aa593db5-eb17-4a93-b6c2-0412d1284430\",\r\n  \"username\": \"Grumpy guy\"\r\n}",
+					"raw": "{\r\n  \"username\": \"Grumpy guy\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -278,7 +282,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/api/v1/removecomment/458e8af0-f8c2-49e7-89d0-5be7e55e2faa",
+					"raw": "http://localhost:5000/api/v1/posts/35f42a26-1a67-4a10-ba71-fd03cb228f10/comments/7f1428b4-edaa-484a-bdb6-cbab270865ac",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -287,8 +291,10 @@
 					"path": [
 						"api",
 						"v1",
-						"removecomment",
-						"458e8af0-f8c2-49e7-89d0-5be7e55e2faa"
+						"posts",
+						"35f42a26-1a67-4a10-ba71-fd03cb228f10",
+						"comments",
+						"7f1428b4-edaa-484a-bdb6-cbab270865ac"
 					]
 				}
 			},
@@ -301,7 +307,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\":\"458e8af0-f8c2-49e7-89d0-5be7e55e2faa\",\r\n    \"username\":\"James\"\r\n}",
+					"raw": "{\r\n    \"username\":\"James\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -309,7 +315,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/api/v1/deletepost/458e8af0-f8c2-49e7-89d0-5be7e55e2faa",
+					"raw": "http://localhost:5000/api/v1/posts/52be2578-29f7-44dd-a8e2-589fc951fbd8",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -318,8 +324,8 @@
 					"path": [
 						"api",
 						"v1",
-						"deletepost",
-						"458e8af0-f8c2-49e7-89d0-5be7e55e2faa"
+						"posts",
+						"52be2578-29f7-44dd-a8e2-589fc951fbd8"
 					]
 				}
 			},

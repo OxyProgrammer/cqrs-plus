@@ -102,6 +102,8 @@ You will need docker desktop on your machine to be able to run this repo. There 
     <img src="Images/project-start-setup.png" alt="Multiple Start up project" />
   </p>
 
+  Please note the gateway project, if set to start will just open a console and the gatweway routes will work just fine. You may optionally choose to not start the gateway in debug mode.
+
 - Run the solution and you should be able to see the swagger pages opening up! 
   <p align="center">
     <img src="Images/swagger.png" alt="Multiple Start up project" />
@@ -137,9 +139,7 @@ You will need docker desktop on your machine to be able to run this repo. There 
   docker-compose up -d
   ```
 
-- Use the postman collection located [here](https://github.com/OxyProgrammer/cqrs-plus/blob/main/PostmanCollection/CQRSPlus.postman_collection.json) to run requests. Alternatively, you can access the swagger page to test the services:
-  - Command Service: [http://localhost:5000/swagger/index.html](http://localhost:5000/swagger/index.html)
-  - LookUp Service: [http://localhost:5001/swagger/index.html](http://localhost:5001/swagger/index.html)
+- You will be able to access the command and lookup service using gateway only. Use the postman collection located [here](https://github.com/OxyProgrammer/cqrs-plus/blob/main/PostmanCollection/CQRSPlus.postman_collection.json) to run requests.
 
 
 ## Contributing
