@@ -5,6 +5,7 @@ using CQRS.Core.Handlers;
 using CQRS.Core.Infrastructure;
 using CQRS.Core.Producers;
 using MongoDB.Bson.Serialization;
+using Post.Cmd.Api;
 using Post.Cmd.Api.Commands;
 using Post.Cmd.Api.Extensions;
 using Post.Cmd.Domain;
@@ -39,10 +40,10 @@ builder.Services.AddScoped<ICommandHandler, CommandHandler>();
 builder.Services.AddScoped<IEventProducer, EventProducer>();
 
 //Register command handler methods.
-
 builder.Services.ConfigureCommandHandlers();
 
-builder.Services.AddScoped<IEventProducer, EventProducer>();
+builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

@@ -8,19 +8,19 @@
 //{
 //    [ApiController]
 //    [Route("api/v1/[controller]")]
-//    public class RemoveCommentController : ControllerBase
+//    public class DeletePostController : ControllerBase
 //    {
-//        private ILogger<RemoveCommentController> _logger;
+//        private ILogger<DeletePostController> _logger;
 //        private ICommandDispatcher _commandDispatcher;
 
-//        public RemoveCommentController(ILogger<RemoveCommentController> logger, ICommandDispatcher commandDispatcher)
+//        public DeletePostController(ILogger<DeletePostController> logger, ICommandDispatcher commandDispatcher)
 //        {
 //            _logger = logger;
 //            _commandDispatcher = commandDispatcher;
 //        }
 
-//        [HttpDelete("{id:guid}")]
-//        public async Task<ActionResult> RemoveCommentAsync(Guid id, RemoveCommentCommand command)
+//        [HttpDelete("{id}")]
+//        public async Task<ActionResult> DeletePostAsync(Guid id, DeletePostCommand command)
 //        {
 //            try
 //            {
@@ -29,7 +29,7 @@
 
 //                return Ok(new BaseResponse
 //                {
-//                    Message = "Remove comment request completed successfully."
+//                    Message = "Delete post request completed successfully."
 //                });
 //            }
 //            catch (InvalidOperationException ex)
@@ -50,7 +50,7 @@
 //            }
 //            catch (Exception ex)
 //            {
-//                const string SAFE_ERROR_MESSAGE = "Error while processing request to remove comment to a post.";
+//                const string SAFE_ERROR_MESSAGE = "Error while processing request to delete a post.";
 //                _logger.Log(LogLevel.Error, ex, SAFE_ERROR_MESSAGE);
 //                return StatusCode(StatusCodes.Status500InternalServerError, new BaseResponse { Message = SAFE_ERROR_MESSAGE });
 //            }
