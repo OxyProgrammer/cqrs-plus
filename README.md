@@ -102,6 +102,8 @@ You will need docker desktop on your machine to be able to run this repo. There 
     <img src="Images/project-start-setup.png" alt="Multiple Start up project" />
   </p>
 
+  Please note the gateway project, if set to start will just open a console and the gatweway routes will work just fine. You may optionally choose to not start the gateway in debug mode.
+
 - Run the solution and you should be able to see the swagger pages opening up! 
   <p align="center">
     <img src="Images/swagger.png" alt="Multiple Start up project" />
