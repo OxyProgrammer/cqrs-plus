@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Post.Cmd.Api.Commands;
 using Post.Cmd.Api.DTOs.Request;
 using Post.Cmd.Api.DTOs.Response;
-using Post.Common.DTOs;
 
 namespace Post.Cmd.Api.Controllers
 {
@@ -12,13 +11,11 @@ namespace Post.Cmd.Api.Controllers
     [Route("api/v1/[controller]")]
     public class PostsController : ControllerBase
     {
-        private readonly ILogger<PostController> _logger;
         private readonly ICommandDispatcher _commandDispatcher;
         private readonly IMapper _mapper;
 
-        public PostController(ILogger<PostController> logger, ICommandDispatcher commandDispatcher, IMapper mapper)
+        public PostsController(ICommandDispatcher commandDispatcher, IMapper mapper)
         {
-            _logger = logger;
             _commandDispatcher = commandDispatcher;
             _mapper = mapper;
         }
@@ -53,10 +50,7 @@ namespace Post.Cmd.Api.Controllers
             command.Id = id;
             await _commandDispatcher.SendAsync(command);
 
-            return Ok(new BaseResponse
-            {
-                Message = "Edit message request completed successfully."
-            });
+            return Ok("Edit message request completed successfully.");
         }
 
         /// <summary>
@@ -64,15 +58,12 @@ namespace Post.Cmd.Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpPut("{id}")]
+        [HttpPut("like/{id:guid}")]
         public async Task<ActionResult> LikePostAsync(Guid id)
         {
             await _commandDispatcher.SendAsync(new LikePostCommand { Id = id });
 
-            return Ok(new BaseResponse
-            {
-                Message = "Like post request completed successfully."
-            });
+            return Ok("Like post request completed successfully.");
         }
 
         /// <summary>
@@ -82,16 +73,11 @@ namespace Post.Cmd.Api.Controllers
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpDelete("{id:guid}")]
-        public async Task<ActionResult> DeletePostAsync(Guid id, [FromBody] DeletePostCommand command)
+        public async Task<ActionResult> DeletePostAsync(Guid id, [FromBody] DeletePostDto deletePostDto)
         {
-            command.Id = id;
-
+            DeletePostCommand command = new DeletePostCommand { Id = id, Username = deletePostDto.Username };
             await _commandDispatcher.SendAsync(command);
-
-            return Ok(new BaseResponse
-            {
-                Message = "Delete post request completed successfully."
-            });
+            return Ok("Delete post request completed successfully.");
         }
     }
 }

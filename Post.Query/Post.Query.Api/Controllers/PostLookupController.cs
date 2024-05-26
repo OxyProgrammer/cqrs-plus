@@ -33,7 +33,7 @@ namespace Post.Query.Api.Controllers
             return NormalResponse(posts);
         }
 
-        [HttpGet("byAuthor/{author:string}")]
+        [HttpGet("byAuthor/{author}")]
         public async Task<ActionResult> GetPostsByAuthorAsync(string author)
         {
             var posts = await _queryDispatcher.SendAsync(new FindPostsByAuthorQuery { Author = author });

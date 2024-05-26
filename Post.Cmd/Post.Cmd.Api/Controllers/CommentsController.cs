@@ -11,13 +11,11 @@ namespace Post.Cmd.Api.Controllers
     [Route("api/v1/posts/{postId}/[controller]")]
     public class CommentsController : ControllerBase
     {
-        private readonly ILogger<CommentController> _logger;
         private readonly ICommandDispatcher _commandDispatcher;
         private readonly IMapper _mapper;
 
-        public CommentController(ILogger<CommentController> logger, ICommandDispatcher commandDispatcher, IMapper mapper)
+        public CommentsController(ICommandDispatcher commandDispatcher, IMapper mapper)
         {
-            _logger = logger;
             _commandDispatcher = commandDispatcher;
             _mapper = mapper;
         }
@@ -35,11 +33,7 @@ namespace Post.Cmd.Api.Controllers
             command.Id = postId;
             await _commandDispatcher.SendAsync(command);
 
-            return Ok(new BaseResponse
-            {
-                Message = "Add comment request completed successfully."
-            });
-            //return CreatedAtRoute("GetEmployeeForCompany", new { companyId, id = employeeToReturn.Id }, employeeToReturn);
+            return Ok("Add comment request completed successfully.");
         }
 
         /// <summary>
@@ -48,7 +42,7 @@ namespace Post.Cmd.Api.Controllers
         /// <param name="id"></param>
         /// <param name="command"></param>
         /// <returns></returns>
-        [HttpPut("{id}")]
+        [HttpPut("{id:guid}")]
         public async Task<ActionResult> EditCommentAsync(Guid postId, Guid id, [FromBody] EditCommentDto editCommentDto)
         {
             var command = _mapper.Map<EditCommentCommand>(editCommentDto);
@@ -56,10 +50,7 @@ namespace Post.Cmd.Api.Controllers
             command.CommentId = id;
             await _commandDispatcher.SendAsync(command);
 
-            return Ok(new BaseResponse
-            {
-                Message = "Edit comment request completed successfully."
-            });
+            return Ok("Edit comment request completed successfully.");
         }
 
         /// <summary>
@@ -77,10 +68,7 @@ namespace Post.Cmd.Api.Controllers
             command.CommentId = id;
             await _commandDispatcher.SendAsync(command);
 
-            return Ok(new BaseResponse
-            {
-                Message = "Remove comment request completed successfully."
-            });
+            return Ok("Remove comment request completed successfully.");
         }
     }
 }

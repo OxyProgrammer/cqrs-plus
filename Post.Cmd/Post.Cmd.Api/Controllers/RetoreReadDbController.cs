@@ -23,25 +23,8 @@ namespace Post.Cmd.Api.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateReadDbAsync()
         {
-            try
-            {
-                await _commandDispatcher.SendAsync(new RestoreReadDbCommand());
-                return StatusCode(StatusCodes.Status201Created, new BaseResponse { Message = "Read database response completed successfully." });
-            }
-            catch (InvalidOperationException ex)
-            {
-                _logger.Log(LogLevel.Warning, ex, "Client made a bad request");
-                return BadRequest(new BaseResponse
-                {
-                    Message = ex.Message
-                });
-            }
-            catch (Exception ex)
-            {
-                const string SAFE_ERROR_MESSAGE = "Error while processing request to restore read database.";
-                _logger.Log(LogLevel.Error, ex, SAFE_ERROR_MESSAGE);
-                return StatusCode(StatusCodes.Status500InternalServerError, new BaseResponse { Message = SAFE_ERROR_MESSAGE });
-            }
+            await _commandDispatcher.SendAsync(new RestoreReadDbCommand());
+            return StatusCode(StatusCodes.Status201Created, "Read database response completed successfully.");
         }
     }
 }
