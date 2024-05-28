@@ -38,6 +38,7 @@ services:
       echo -e 'Successfully created the following topics:'
       kafka-topics --bootstrap-server kafka:29092 --list
       "
+  
   mongo-container:
     image: mongo:latest
     ports:
@@ -59,7 +60,7 @@ services:
     image: oxyprogrammer/command-svc:latest
     build:
       context: .
-      dockerfile: Post.Cmd/Post.Cmd.Api/Dockerfile
+      dockerfile: src/Post.Cmd/Post.Cmd.Api/Dockerfile
     # ports:
      # - "5001:8080"  # map port 5001 on host to port 8080 in the container
     networks:
@@ -74,7 +75,7 @@ services:
     image: oxyprogrammer/lookup-svc:latest
     build:
       context: .
-      dockerfile: Post.Query/Post.Query.Api/Dockerfile
+      dockerfile: src/Post.Query/Post.Query.Api/Dockerfile
     # ports:
       # - "5002:8080"  # Map port 5002 on host to port 8080 in the container
     networks:
@@ -86,7 +87,7 @@ services:
       - postgres  
 
   gateway-svc:
-    image: oxyprogrammer/gateway-svc:latest
+    image: src/oxyprogrammer/gateway-svc:latest
     build:
       context: .
       dockerfile: CQRS.Gateway/Dockerfile

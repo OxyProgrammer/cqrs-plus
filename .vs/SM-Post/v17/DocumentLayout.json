@@ -1,0 +1,139 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\cqrs-plus\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{85E75C2A-C42B-466D-9E69-10A133A3F7E9}|Post.Query\\Post.Query.Api\\Post.Query.Api.csproj|c:\\cqrs-plus\\post.query\\post.query.api\\controllers\\postlookupcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85E75C2A-C42B-466D-9E69-10A133A3F7E9}|Post.Query\\Post.Query.Api\\Post.Query.Api.csproj|solutionrelative:post.query\\post.query.api\\controllers\\postlookupcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85E75C2A-C42B-466D-9E69-10A133A3F7E9}|Post.Query\\Post.Query.Api\\Post.Query.Api.csproj|c:\\cqrs-plus\\post.query\\post.query.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85E75C2A-C42B-466D-9E69-10A133A3F7E9}|Post.Query\\Post.Query.Api\\Post.Query.Api.csproj|solutionrelative:post.query\\post.query.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1A8A44AE-7A23-480C-B8AB-A1758CA5ECF7}|Post.Cmd\\Post.Cmd.Api\\Post.Cmd.Api.csproj|c:\\cqrs-plus\\post.cmd\\post.cmd.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1A8A44AE-7A23-480C-B8AB-A1758CA5ECF7}|Post.Cmd\\Post.Cmd.Api\\Post.Cmd.Api.csproj|solutionrelative:post.cmd\\post.cmd.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1A8A44AE-7A23-480C-B8AB-A1758CA5ECF7}|Post.Cmd\\Post.Cmd.Api\\Post.Cmd.Api.csproj|c:\\cqrs-plus\\post.cmd\\post.cmd.api\\globalexceptionhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1A8A44AE-7A23-480C-B8AB-A1758CA5ECF7}|Post.Cmd\\Post.Cmd.Api\\Post.Cmd.Api.csproj|solutionrelative:post.cmd\\post.cmd.api\\globalexceptionhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1A8A44AE-7A23-480C-B8AB-A1758CA5ECF7}|Post.Cmd\\Post.Cmd.Api\\Post.Cmd.Api.csproj|c:\\cqrs-plus\\post.cmd\\post.cmd.api\\controllers\\postcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1A8A44AE-7A23-480C-B8AB-A1758CA5ECF7}|Post.Cmd\\Post.Cmd.Api\\Post.Cmd.Api.csproj|solutionrelative:post.cmd\\post.cmd.api\\controllers\\postcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1A8A44AE-7A23-480C-B8AB-A1758CA5ECF7}|Post.Cmd\\Post.Cmd.Api\\Post.Cmd.Api.csproj|c:\\cqrs-plus\\post.cmd\\post.cmd.api\\controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1A8A44AE-7A23-480C-B8AB-A1758CA5ECF7}|Post.Cmd\\Post.Cmd.Api\\Post.Cmd.Api.csproj|solutionrelative:post.cmd\\post.cmd.api\\controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1A8A44AE-7A23-480C-B8AB-A1758CA5ECF7}|Post.Cmd\\Post.Cmd.Api\\Post.Cmd.Api.csproj|c:\\cqrs-plus\\post.cmd\\post.cmd.api\\dtos\\response\\newpostresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1A8A44AE-7A23-480C-B8AB-A1758CA5ECF7}|Post.Cmd\\Post.Cmd.Api\\Post.Cmd.Api.csproj|solutionrelative:post.cmd\\post.cmd.api\\dtos\\response\\newpostresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\cqrs-plus\\Post.Query\\Post.Query.Api\\Program.cs",
+              "RelativeDocumentMoniker": "Post.Query\\Post.Query.Api\\Program.cs",
+              "ToolTip": "C:\\cqrs-plus\\Post.Query\\Post.Query.Api\\Program.cs",
+              "RelativeToolTip": "Post.Query\\Post.Query.Api\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACEAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T11:05:34.571Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\cqrs-plus\\Post.Cmd\\Post.Cmd.Api\\Program.cs",
+              "RelativeDocumentMoniker": "Post.Cmd\\Post.Cmd.Api\\Program.cs",
+              "ToolTip": "C:\\cqrs-plus\\Post.Cmd\\Post.Cmd.Api\\Program.cs",
+              "RelativeToolTip": "Post.Cmd\\Post.Cmd.Api\\Program.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAAACwAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T11:00:34.834Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PostLookupController.cs",
+              "DocumentMoniker": "C:\\cqrs-plus\\Post.Query\\Post.Query.Api\\Controllers\\PostLookupController.cs",
+              "RelativeDocumentMoniker": "Post.Query\\Post.Query.Api\\Controllers\\PostLookupController.cs",
+              "ToolTip": "C:\\cqrs-plus\\Post.Query\\Post.Query.Api\\Controllers\\PostLookupController.cs",
+              "RelativeToolTip": "Post.Query\\Post.Query.Api\\Controllers\\PostLookupController.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAQwBwAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T10:59:15.63Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "NewPostResponse.cs",
+              "DocumentMoniker": "C:\\cqrs-plus\\Post.Cmd\\Post.Cmd.Api\\DTOs\\Response\\NewPostResponse.cs",
+              "RelativeDocumentMoniker": "Post.Cmd\\Post.Cmd.Api\\DTOs\\Response\\NewPostResponse.cs",
+              "ToolTip": "C:\\cqrs-plus\\Post.Cmd\\Post.Cmd.Api\\DTOs\\Response\\NewPostResponse.cs",
+              "RelativeToolTip": "Post.Cmd\\Post.Cmd.Api\\DTOs\\Response\\NewPostResponse.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T09:43:26.73Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GlobalExceptionHandler.cs",
+              "DocumentMoniker": "C:\\cqrs-plus\\Post.Cmd\\Post.Cmd.Api\\GlobalExceptionHandler.cs",
+              "RelativeDocumentMoniker": "Post.Cmd\\Post.Cmd.Api\\GlobalExceptionHandler.cs",
+              "ToolTip": "C:\\cqrs-plus\\Post.Cmd\\Post.Cmd.Api\\GlobalExceptionHandler.cs",
+              "RelativeToolTip": "Post.Cmd\\Post.Cmd.Api\\GlobalExceptionHandler.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAuwDwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T09:36:17.421Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PostController.cs",
+              "DocumentMoniker": "C:\\cqrs-plus\\Post.Cmd\\Post.Cmd.Api\\Controllers\\PostController.cs",
+              "RelativeDocumentMoniker": "Post.Cmd\\Post.Cmd.Api\\Controllers\\PostController.cs",
+              "ToolTip": "C:\\cqrs-plus\\Post.Cmd\\Post.Cmd.Api\\Controllers\\PostController.cs",
+              "RelativeToolTip": "Post.Cmd\\Post.Cmd.Api\\Controllers\\PostController.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAAQwC0AAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T09:37:47.669Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CommentController.cs",
+              "DocumentMoniker": "C:\\cqrs-plus\\Post.Cmd\\Post.Cmd.Api\\Controllers\\CommentController.cs",
+              "RelativeDocumentMoniker": "Post.Cmd\\Post.Cmd.Api\\Controllers\\CommentController.cs",
+              "ToolTip": "C:\\cqrs-plus\\Post.Cmd\\Post.Cmd.Api\\Controllers\\CommentController.cs",
+              "RelativeToolTip": "Post.Cmd\\Post.Cmd.Api\\Controllers\\CommentController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T09:13:48.777Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
