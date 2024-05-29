@@ -57,7 +57,7 @@ services:
       - pgdata:/var/lib/postgresql/data
       
   command-svc:
-    image: oxyprogrammer/command-svc:latest
+    container_name: command
     build:
       context: .
       dockerfile: src/Post.Cmd/Post.Cmd.Api/Dockerfile
@@ -72,7 +72,7 @@ services:
       - mongo-container  
 
   lookup-svc:
-    image: oxyprogrammer/lookup-svc:latest
+    container_name: lookup
     build:
       context: .
       dockerfile: src/Post.Query/Post.Query.Api/Dockerfile
@@ -87,7 +87,7 @@ services:
       - postgres  
 
   gateway-svc:
-    image: src/oxyprogrammer/gateway-svc:latest
+    container_name: gateway
     build:
       context: .
       dockerfile: src/CQRS.Gateway/Dockerfile
@@ -100,6 +100,18 @@ services:
     depends_on:
       - lookup-svc
       - command-svc
+
+  frontend:
+    container_name: frontend
+    build: ./frontend
+    restart: always
+    environment:
+      - NODE_ENV=production
+    ports:
+      - 3000:3000
+    deploy:
+      mode: replicated
+      replicas: 1
       
 volumes:
   zookeeper_data:
