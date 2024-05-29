@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
-import { Post } from './PostCollection';
+import Image from 'next/image';
+import { Post } from '@/models/models';
 
 interface PostEditorProps {
   post: Post;
@@ -8,20 +9,22 @@ interface PostEditorProps {
 
 const PostEditor: React.FC<PostEditorProps> = ({ post }) => {
   const [editMode, setEditMode] = useState(false);
-  const [title, setTitle] = useState('Your Title');
-  const [subtitle, setSubtitle] = useState('Your Subtitle');
-  const [editedTitle, setEditedTitle] = useState(title);
-  const [editedSubtitle, setEditedSubtitle] = useState(subtitle);
+  const [message, setMessage] = useState(post.message);
+  const [author, setAuthor] = useState(post.author);
 
   const handleEditClick = () => {
     setEditMode(true);
-    setEditedTitle(title);
-    setEditedSubtitle(subtitle);
+  };
+  const handleCancelClick = () => {
+    setMessage(post.message)
+    setAuthor(post.author)
+    setEditMode(false);
+  };
+  const handleLikeClick = () => {
+    setEditMode(false);
   };
 
   const handleSaveClick = () => {
-    setTitle(editedTitle);
-    setSubtitle(editedSubtitle);
     setEditMode(false);
   };
 
@@ -29,42 +32,68 @@ const PostEditor: React.FC<PostEditorProps> = ({ post }) => {
     <div>
       {!editMode ? (
         <>
-          <h1>{title}</h1>
-          <h2>
-            {subtitle}
+          <div className='font-bold overflow-hidden whitespace-nowrap text-2xl'>
+            {message}
+          </div>
+          <div className='text-gray-500 text-xl'>{post.author}</div>
+          <div className='flex justify-between my-2'>
             <button
-              className='ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded'
+              className=' bg-blue-500 hover:bg-blue-700 text-white text-lg px-2 py-1 rounded inline-flex items-center'
               onClick={handleEditClick}
             >
-              Edit
+              <Image
+                src='edit.svg'
+                alt='edit icon'
+                className='mr-2'
+                height={20}
+                width={20}
+              />
+              <span className='mt-1'>Edit</span>
             </button>
             <button
-              className='ml-2 bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded'
-              onClick={() => alert('Like')}
+              className='bg-green-700 hover:bg-green-900 text-white px-2 py-1 text-lg rounded inline-flex items-center'
+              onClick={handleLikeClick}
             >
-              Like
+              <span className='mt-1'>Like</span>
+              <Image
+                src='like.svg'
+                alt='like icon'
+                className='ml-2'
+                height={20}
+                width={20}
+              />
             </button>
-          </h2>
+          </div>
         </>
       ) : (
         <>
+          <div className='font-bold text-lg mb-1'>Post Content:</div>
           <textarea
-            value={editedTitle}
-            onChange={(e) => setEditedTitle(e.target.value)}
-            className='block w-full mb-2'
+            className='block border w-full mb-4 rounded border-spacing-1 px-2 py-1'
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
             rows={3}
           />
+          <div className='font-bold text-lg mb-1'>Author:</div>
           <input
-            value={editedSubtitle}
-            onChange={(e) => setEditedSubtitle(e.target.value)}
-            className='block w-full mb-2'
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
+            className='block border w-full mb-4 text-sm p-2'
           />
-          <button
-            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded'
-            onClick={handleSaveClick}
-          >
-            Save
-          </button>
+          <div className='flex justify-between my-2'>
+            <button
+              className='bg-red-500 hover:bg-red-700 text-white text-lg py-1 px-2 rounded'
+              onClick={handleCancelClick}
+            >
+              Cancel
+            </button>
+            <button
+              className='bg-blue-500 hover:bg-blue-700 text-white text-lg py-1 px-2 rounded'
+              onClick={handleSaveClick}
+            >
+              Save
+            </button>
+          </div>
         </>
       )}
     </div>

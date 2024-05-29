@@ -1,19 +1,11 @@
 'use client';
+import { FilterArgs } from '@/models/models';
 import React, { useState } from 'react';
 
 interface FilterProps {
-  //   onFilterSubmit: (filterOptions: FilterOptions) => void;
-  //   onClearFilter: () => void;
-  //{ onFilterSubmit, onClearFilter }
+  filterRequested: (filterArguments: FilterArgs) => Promise<void>;
 }
-
-interface FilterOptions {
-  postId?: string;
-  author?: string;
-  hasLikes?: boolean;
-  minLikes?: number;
-}
-const Filter: React.FC<FilterProps> = () => {
+const Filter: React.FC<FilterProps> = ({ filterRequested }) => {
   const [selectedOption, setSelectedOption] = useState<string>('None');
   const [postId, setPostId] = useState<string>('');
   const [author, setAuthor] = useState<string>('');
@@ -30,17 +22,40 @@ const Filter: React.FC<FilterProps> = () => {
     setMinLikes(0);
   };
 
-  const handleSubmit = () => {
-    const filterOptions: FilterOptions = {};
-    if (postId !== '') {
-      filterOptions.postId = postId;
+  const handleSubmit = async () => {
+    const filterArgs: FilterArgs = {
+      filterCriteria: selectedOption,
+      filterData: undefined,
+    };
+    switch (selectedOption) {
+      case 'None':
+        break;
+      case 'PostId':
+        if (!postId) {
+          alert('Provide Post Id');
+          return;
+        }
+        filterArgs.filterData = postId;
+        break;
+      case 'Author':
+        if (!author) {
+          alert('Provide Author.');
+          return;
+        }
+        filterArgs.filterData = author;
+        break;
+      case 'MinLikes':
+        if (!minLikes) {
+          alert('Provide Minimum Likes.');
+          return;
+        }
+        filterArgs.filterData = minLikes;
+        break;
+      default:
+        alert('Some error happened!');
+        break;
     }
-    if (author !== '') {
-      filterOptions.author = author;
-    }
-    if (minLikes != 0) {
-    }
-    //   onFilterSubmit(filterOptions);
+    await filterRequested(filterArgs);
   };
 
   return (
@@ -59,8 +74,8 @@ const Filter: React.FC<FilterProps> = () => {
           <input
             type='radio'
             value='Post Id'
-            checked={selectedOption === 'Post Id'}
-            onChange={() => handleOptionChange('Post Id')}
+            checked={selectedOption === 'PostId'}
+            onChange={() => handleOptionChange('PostId')}
           />
           <span className='ml-2'>Post Id</span>
           <input
@@ -68,7 +83,7 @@ const Filter: React.FC<FilterProps> = () => {
             placeholder='Post Id'
             value={postId}
             onChange={(e) => setPostId(e.target.value)}
-            disabled={selectedOption !== 'Post Id'}
+            disabled={selectedOption !== 'PostId'}
             className='border border-gray-300 px-2 py-1 ml-2'
           />
         </div>
@@ -111,10 +126,12 @@ const Filter: React.FC<FilterProps> = () => {
       </div>
 
       <div className='flex justify-end mt-4'>
-        <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2'>
-          Clear Filter
+        <button
+          className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'
+          onClick={handleSubmit}
+        >
+          Submit
         </button>
-        <button className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'>Submit</button>
       </div>
     </div>
   );
