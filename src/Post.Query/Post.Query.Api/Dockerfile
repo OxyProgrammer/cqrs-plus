@@ -8,13 +8,13 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Post.Query/Post.Query.Api/Post.Query.Api.csproj", "Post.Query/Post.Query.Api/"]
-COPY ["CQRS.Core/CQRS.Core.csproj", "CQRS.Core/"]
-COPY ["Post.Common/Post.Common.csproj", "Post.Common/"]
-COPY ["Post.Query/Post.Query.Domain/Post.Query.Domain.csproj", "Post.Query/Post.Query.Domain/"]
-COPY ["Post.Query/Post.Query.Infrastructure/Post.Query.Infrastructure.csproj", "Post.Query/Post.Query.Infrastructure/"]
-RUN dotnet restore "./Post.Query/Post.Query.Api/Post.Query.Api.csproj"
-COPY . .
+COPY ["src/Post.Query/Post.Query.Api/Post.Query.Api.csproj", "Post.Query/Post.Query.Api/"]
+COPY ["src/CQRS.Core/CQRS.Core.csproj", "CQRS.Core/"]
+COPY ["src/Post.Common/Post.Common.csproj", "Post.Common/"]
+COPY ["src/Post.Query/Post.Query.Domain/Post.Query.Domain.csproj", "Post.Query/Post.Query.Domain/"]
+COPY ["src/Post.Query/Post.Query.Infrastructure/Post.Query.Infrastructure.csproj", "Post.Query/Post.Query.Infrastructure/"]
+RUN dotnet restore "/src/Post.Query/Post.Query.Api/Post.Query.Api.csproj"
+COPY src/. .
 WORKDIR "/src/Post.Query/Post.Query.Api"
 RUN dotnet build "./Post.Query.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 

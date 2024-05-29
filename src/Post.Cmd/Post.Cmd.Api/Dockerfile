@@ -8,13 +8,13 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Post.Cmd/Post.Cmd.Api/Post.Cmd.Api.csproj", "Post.Cmd/Post.Cmd.Api/"]
-COPY ["CQRS.Core/CQRS.Core.csproj", "CQRS.Core/"]
-COPY ["Post.Common/Post.Common.csproj", "Post.Common/"]
-COPY ["Post.Cmd/Post.Cmd.Domain/Post.Cmd.Domain.csproj", "Post.Cmd/Post.Cmd.Domain/"]
-COPY ["Post.Cmd/Post.Cmd.Infrastructure/Post.Cmd.Infrastructure.csproj", "Post.Cmd/Post.Cmd.Infrastructure/"]
-RUN dotnet restore "./Post.Cmd/Post.Cmd.Api/Post.Cmd.Api.csproj"
-COPY . .
+COPY ["src/Post.Cmd/Post.Cmd.Api/Post.Cmd.Api.csproj", "Post.Cmd/Post.Cmd.Api/"]
+COPY ["src/CQRS.Core/CQRS.Core.csproj", "CQRS.Core/"]
+COPY ["src/Post.Common/Post.Common.csproj", "Post.Common/"]
+COPY ["src/Post.Cmd/Post.Cmd.Domain/Post.Cmd.Domain.csproj", "Post.Cmd/Post.Cmd.Domain/"]
+COPY ["src/Post.Cmd/Post.Cmd.Infrastructure/Post.Cmd.Infrastructure.csproj", "Post.Cmd/Post.Cmd.Infrastructure/"]
+RUN dotnet restore "/src/Post.Cmd/Post.Cmd.Api/Post.Cmd.Api.csproj"
+COPY src/. .
 WORKDIR "/src/Post.Cmd/Post.Cmd.Api"
 RUN dotnet build "./Post.Cmd.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 

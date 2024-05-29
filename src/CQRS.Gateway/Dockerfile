@@ -9,9 +9,9 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["CQRS.Gateway/CQRS.Gateway.csproj", "CQRS.Gateway/"]
-RUN dotnet restore "./CQRS.Gateway/CQRS.Gateway.csproj"
-COPY . .
+COPY ["src/CQRS.Gateway/CQRS.Gateway.csproj", "CQRS.Gateway/"]
+RUN dotnet restore "/src/CQRS.Gateway/CQRS.Gateway.csproj"
+COPY src/. .
 WORKDIR "/src/CQRS.Gateway"
 RUN dotnet build "./CQRS.Gateway.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
