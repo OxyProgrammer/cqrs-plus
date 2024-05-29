@@ -111,10 +111,10 @@ const Filter: React.FC<FilterProps> = () => {
       </div>
 
       <div className='flex justify-end mt-4'>
-        <button className='bg-blue-500 text-white px-4 py-2 mr-2'>
+        <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2'>
           Clear Filter
         </button>
-        <button className='bg-green-700 text-white px-4 py-2'>Submit</button>
+        <button className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'>Submit</button>
       </div>
     </div>
   );
