@@ -33,7 +33,6 @@ namespace Post.Query.Api.Controllers
                 return NoContent();
             }
             return Ok(posts.First());
-            
         }
 
         [HttpGet("byAuthor/{author}")]
