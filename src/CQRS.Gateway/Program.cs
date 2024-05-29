@@ -4,23 +4,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddReverseProxy()
     .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
 
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("customPolicy", b =>
-    {
-        b.AllowAnyMethod()
-           .AllowAnyHeader()
-           .SetIsOriginAllowed(origin => true)
-           .AllowCredentials();
-    });
-});
+builder.Services.AddCors();
+
 var app = builder.Build();
-app.UseCors();
+//This is not a good practice, but done to bypass complications for UI app.
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+
 app.MapReverseProxy();
 
 app.UseAuthorization();

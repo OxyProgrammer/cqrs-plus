@@ -8,9 +8,11 @@ interface CommentEditorProps {
 }
 
 const CommentEditor: React.FC<CommentEditorProps> = ({ comment }) => {
+  
     const [editMode, setEditMode] = useState(false);
     const [message, setMessage] = useState('This is a new comment given');
     const [author, setAuthor] = useState('Jane Doe');
+
     const handleEditClick = () => {
       setEditMode(true);
     };
@@ -26,11 +28,12 @@ const CommentEditor: React.FC<CommentEditorProps> = ({ comment }) => {
     const handleSaveClick = () => {
       setEditMode(false);
     };
+
     return (
       <div className='border-b-2 border-gray-200 mb-2'>
         {!editMode ? (
           <>
-            <div className='font-bold overflow-hidden whitespace-nowrap'>
+            <div className='font-bold break-words whitespace-nowrap'>
               {message}
             </div>
             <div className='text-gray-500'>{author}</div>

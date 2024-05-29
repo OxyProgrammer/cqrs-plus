@@ -15,11 +15,13 @@ const PostEditor: React.FC<PostEditorProps> = ({ post }) => {
   const handleEditClick = () => {
     setEditMode(true);
   };
+
   const handleCancelClick = () => {
     setMessage(post.message)
     setAuthor(post.author)
     setEditMode(false);
   };
+  
   const handleLikeClick = () => {
     setEditMode(false);
   };
@@ -32,7 +34,7 @@ const PostEditor: React.FC<PostEditorProps> = ({ post }) => {
     <div>
       {!editMode ? (
         <>
-          <div className='font-bold overflow-hidden whitespace-nowrap text-2xl'>
+          <div className='font-bold overflow-hidden break-words text-2xl'>
             {message}
           </div>
           <div className='text-gray-500 text-xl'>{post.author}</div>

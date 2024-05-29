@@ -94,7 +94,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/api/v1/postlookup/byid/37133e01-8310-4038-ab4e-d56272186695",
+					"raw": "http://localhost:5000/api/v1/postlookup/8d2d93c5-34f7-49a4-97dd-794d98354d24",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -104,8 +104,7 @@
 						"api",
 						"v1",
 						"postlookup",
-						"byid",
-						"37133e01-8310-4038-ab4e-d56272186695"
+						"8d2d93c5-34f7-49a4-97dd-794d98354d24"
 					]
 				}
 			},

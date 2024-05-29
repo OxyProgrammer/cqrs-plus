@@ -7,7 +7,6 @@ interface FilterProps {
 }
 const Filter: React.FC<FilterProps> = ({ filterRequested }) => {
   const [selectedOption, setSelectedOption] = useState<string>('None');
-  const [postId, setPostId] = useState<string>('');
   const [author, setAuthor] = useState<string>('');
   const [minLikes, setMinLikes] = useState<number>(0);
 
@@ -17,7 +16,6 @@ const Filter: React.FC<FilterProps> = ({ filterRequested }) => {
   };
 
   const clearInputs = () => {
-    setPostId('');
     setAuthor('');
     setMinLikes(0);
   };
@@ -30,12 +28,7 @@ const Filter: React.FC<FilterProps> = ({ filterRequested }) => {
     switch (selectedOption) {
       case 'None':
         break;
-      case 'PostId':
-        if (!postId) {
-          alert('Provide Post Id');
-          return;
-        }
-        filterArgs.filterData = postId;
+      case 'WithComments':
         break;
       case 'Author':
         if (!author) {
@@ -73,19 +66,11 @@ const Filter: React.FC<FilterProps> = ({ filterRequested }) => {
         <div>
           <input
             type='radio'
-            value='Post Id'
-            checked={selectedOption === 'PostId'}
-            onChange={() => handleOptionChange('PostId')}
+            value='WithComments'
+            checked={selectedOption === 'WithComments'}
+            onChange={() => handleOptionChange('WithComments')}
           />
-          <span className='ml-2'>Post Id</span>
-          <input
-            type='text'
-            placeholder='Post Id'
-            value={postId}
-            onChange={(e) => setPostId(e.target.value)}
-            disabled={selectedOption !== 'PostId'}
-            className='border border-gray-300 px-2 py-1 ml-2'
-          />
+          <span className='ml-2'>With Comments</span>
         </div>
         <div>
           <input
@@ -127,7 +112,7 @@ const Filter: React.FC<FilterProps> = ({ filterRequested }) => {
 
       <div className='flex justify-end mt-4'>
         <button
-          className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'
+          className='bg-green-700 hover:bg-green-900 text-white py-2 px-4 rounded'
           onClick={handleSubmit}
         >
           Submit

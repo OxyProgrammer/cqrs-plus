@@ -1,6 +1,7 @@
 import CommentsCollection from '@/components/CommentsCollection';
 import PostEditor from '@/components/PostEditor';
-import { getDummyPostById } from '@/models/models';
+import { getPostById } from '@/constants/serverMethods';
+import { Post, getDummyPostById } from '@/models/models';
 import { notFound } from 'next/navigation';
 import React from 'react';
 
@@ -10,7 +11,8 @@ type PostPageProps = {
 
 const PostPage = async ({ params }: PostPageProps) => {
   const { postId } = params;
-  const post = getDummyPostById(postId);
+  let post: Post | null = await getPostById(postId);
+
   if (!post) {
     return notFound();
   }
