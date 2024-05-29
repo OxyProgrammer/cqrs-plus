@@ -90,7 +90,7 @@ services:
     image: src/oxyprogrammer/gateway-svc:latest
     build:
       context: .
-      dockerfile: CQRS.Gateway/Dockerfile
+      dockerfile: src/CQRS.Gateway/Dockerfile
     ports:
       - "5000:8080"  # Map port 5000 on host to port 8080 in the container
     networks:
