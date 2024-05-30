@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"author\": \"James\",\r\n  \"message\": \"New post in Docker\"\r\n}",
+					"raw": "{\r\n  \"author\": \"James D'Costa\",\r\n  \"message\": \"New post by James in System Design.\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -43,7 +43,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"message\": \"[Edited]: Put some new post here!\"\r\n}",
+					"raw": "{\r\n  \"message\": \"[Edited]: Edited post by James in System Design!\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -51,7 +51,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/api/v1/posts/35f42a26-1a67-4a10-ba71-fd03cb228f10",
+					"raw": "http://localhost:5000/api/v1/posts/bb846a70-26b3-49b2-8f97-dc468f31001f",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -61,7 +61,7 @@
 						"api",
 						"v1",
 						"posts",
-						"35f42a26-1a67-4a10-ba71-fd03cb228f10"
+						"bb846a70-26b3-49b2-8f97-dc468f31001f"
 					]
 				}
 			},
@@ -73,7 +73,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/api/v1/postlookup",
+					"raw": "http://localhost:5000/api/v1/posts",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -82,7 +82,7 @@
 					"path": [
 						"api",
 						"v1",
-						"postlookup"
+						"posts"
 					]
 				}
 			},
@@ -94,7 +94,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/api/v1/postlookup/byid/37133e01-8310-4038-ab4e-d56272186695",
+					"raw": "http://localhost:5000/api/v1/posts/bb846a70-26b3-49b2-8f97-dc468f31001f",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -103,9 +103,32 @@
 					"path": [
 						"api",
 						"v1",
-						"postlookup",
-						"byid",
-						"37133e01-8310-4038-ab4e-d56272186695"
+						"posts",
+						"bb846a70-26b3-49b2-8f97-dc468f31001f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCommentById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/posts/bb846a70-26b3-49b2-8f97-dc468f31001f/comments/f8a966fa-01bb-4769-9063-4ac069c06623",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"bb846a70-26b3-49b2-8f97-dc468f31001f",
+						"comments",
+						"f8a966fa-01bb-4769-9063-4ac069c06623"
 					]
 				}
 			},
@@ -117,7 +140,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/api/v1/postlookup/byauthor/James",
+					"raw": "http://localhost:5000/api/v1/posts/byauthor/James",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -126,7 +149,7 @@
 					"path": [
 						"api",
 						"v1",
-						"postlookup",
+						"posts",
 						"byauthor",
 						"James"
 					]
@@ -140,7 +163,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/api/v1/postlookup/withcomments",
+					"raw": "http://localhost:5000/api/v1/posts/withcomments",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -149,7 +172,7 @@
 					"path": [
 						"api",
 						"v1",
-						"postlookup",
+						"posts",
 						"withcomments"
 					]
 				}
@@ -162,7 +185,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/api/v1/postlookup/withlikes/3",
+					"raw": "http://localhost:5000/api/v1/posts/withlikes/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -171,7 +194,7 @@
 					"path": [
 						"api",
 						"v1",
-						"postlookup",
+						"posts",
 						"withlikes",
 						"3"
 					]
@@ -185,7 +208,7 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/api/v1/posts/like/35f42a26-1a67-4a10-ba71-fd03cb228f10",
+					"raw": "http://localhost:5000/api/v1/posts/like/bb846a70-26b3-49b2-8f97-dc468f31001f",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -196,7 +219,7 @@
 						"v1",
 						"posts",
 						"like",
-						"35f42a26-1a67-4a10-ba71-fd03cb228f10"
+						"bb846a70-26b3-49b2-8f97-dc468f31001f"
 					]
 				}
 			},
@@ -205,11 +228,11 @@
 		{
 			"name": "AddCommentToPost",
 			"request": {
-				"method": "PUT",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"comment\": \"I dont like this post\",\r\n  \"username\": \"Grumpy guy\"\r\n}",
+					"raw": "{\r\n  \"comment\": \"Sorry to learn that Grumpy. But I beleive if you give it a read, you might like.\",\r\n  \"username\": \"James D'Costa\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -217,7 +240,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/api/v1/posts/35f42a26-1a67-4a10-ba71-fd03cb228f10/comments",
+					"raw": "http://localhost:5000/api/v1/posts/bb846a70-26b3-49b2-8f97-dc468f31001f/comments",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -227,7 +250,7 @@
 						"api",
 						"v1",
 						"posts",
-						"35f42a26-1a67-4a10-ba71-fd03cb228f10",
+						"bb846a70-26b3-49b2-8f97-dc468f31001f",
 						"comments"
 					]
 				}
@@ -241,7 +264,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"comment\": \"I don't like this post.[Edit: Corrected missing apostrophe]\",\r\n  \"username\": \"Grumpy guy\"\r\n}",
+					"raw": "{\r\n  \"comment\": \"[Edited]: I am sorry James, I read it and now I find it insightful.\",\r\n  \"username\": \"Grumpy guy\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -249,7 +272,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/api/v1/posts/35f42a26-1a67-4a10-ba71-fd03cb228f10/comments/0e77252d-91a7-4b84-8da9-5fc5374893bf",
+					"raw": "http://localhost:5000/api/v1/posts/bb846a70-26b3-49b2-8f97-dc468f31001f/comments/f8a966fa-01bb-4769-9063-4ac069c06623",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -259,9 +282,9 @@
 						"api",
 						"v1",
 						"posts",
-						"35f42a26-1a67-4a10-ba71-fd03cb228f10",
+						"bb846a70-26b3-49b2-8f97-dc468f31001f",
 						"comments",
-						"0e77252d-91a7-4b84-8da9-5fc5374893bf"
+						"f8a966fa-01bb-4769-9063-4ac069c06623"
 					]
 				}
 			},

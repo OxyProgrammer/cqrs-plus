@@ -70,4 +70,3 @@ volumes:
 networks:
   default:
       name: cqrsplusnetwork
-      external: true

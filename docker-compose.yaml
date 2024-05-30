@@ -38,6 +38,7 @@ services:
       echo -e 'Successfully created the following topics:'
       kafka-topics --bootstrap-server kafka:29092 --list
       "
+  
   mongo-container:
     image: mongo:latest
     ports:
@@ -56,10 +57,10 @@ services:
       - pgdata:/var/lib/postgresql/data
       
   command-svc:
-    image: oxyprogrammer/command-svc:latest
+    container_name: command
     build:
       context: .
-      dockerfile: Post.Cmd/Post.Cmd.Api/Dockerfile
+      dockerfile: src/Post.Cmd/Post.Cmd.Api/Dockerfile
     # ports:
      # - "5001:8080"  # map port 5001 on host to port 8080 in the container
     networks:
@@ -71,10 +72,10 @@ services:
       - mongo-container  
 
   lookup-svc:
-    image: oxyprogrammer/lookup-svc:latest
+    container_name: lookup
     build:
       context: .
-      dockerfile: Post.Query/Post.Query.Api/Dockerfile
+      dockerfile: src/Post.Query/Post.Query.Api/Dockerfile
     # ports:
       # - "5002:8080"  # Map port 5002 on host to port 8080 in the container
     networks:
@@ -86,10 +87,10 @@ services:
       - postgres  
 
   gateway-svc:
-    image: oxyprogrammer/gateway-svc:latest
+    container_name: gateway
     build:
       context: .
-      dockerfile: CQRS.Gateway/Dockerfile
+      dockerfile: src/CQRS.Gateway/Dockerfile
     ports:
       - "5000:8080"  # Map port 5000 on host to port 8080 in the container
     networks:
@@ -99,6 +100,18 @@ services:
     depends_on:
       - lookup-svc
       - command-svc
+
+  frontend:
+    container_name: frontend
+    build: ./frontend
+    restart: always
+    environment:
+      - NODE_ENV=production
+    ports:
+      - 3000:3000
+    deploy:
+      mode: replicated
+      replicas: 1
       
 volumes:
   zookeeper_data:

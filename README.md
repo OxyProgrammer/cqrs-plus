@@ -37,37 +37,37 @@ This repository contains a comprehensive CQRS implementation for a distributed e
 </p>
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## CQRS With event Sourcing
+# CQRS With event Sourcing
 
 <p align="center">
   <img src="Images/CQRSFlowDiagram.png" alt="CSharp Logo" />
 </p>
 
-#### CQRS
+### CQRS
 - **What is CQRS?**
   - CQRS separates read (queries) and write (commands) operations, enabling independent scaling and optimization.
   - It recognizes that reading and writing data have different requirements and can benefit from separate implementations.
 
-#### Event Sourcing
+### Event Sourcing
 
 - **Understanding Event Sourcing**
   - Event Sourcing captures state changes as a sequence of events over time.
   - Instead of directly modifying state, events representing changes are appended to an event log or store.
 
-#### Combining CQRS with Event Sourcing
+### Combining CQRS with Event Sourcing
 
 - **Why Combine CQRS with Event Sourcing?**
   - CQRS and Event Sourcing are often used together for scalable, maintainable systems.
   - Commands generate events, which are stored in an event log, facilitating a complete history of state changes.
 
-#### Benefits
+### Benefits
 
 - **Advantages of CQRS Event Sourcing**
   - Clear separation of read and write operations leads to simpler codebases.
   - Event-driven architectures are enabled, promoting scalability and responsiveness.
   - Auditing and debugging are facilitated through the event log's historical data.
 
-#### Considerations and Challenges
+### Considerations and Challenges
 
 - **Things to Consider**
   - Careful planning is needed for data consistency, eventual consistency, and concurrency.
@@ -76,11 +76,11 @@ This repository contains a comprehensive CQRS implementation for a distributed e
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-## Setup
+# Setup
 
 You will need docker desktop on your machine to be able to run this repo. There are two ways in which you could run the repo:
 
-#### Using Visual Sudio Debugger
+### Using Visual Sudio Debugger
 
 - Clone the repository to your local machine:
 
@@ -92,6 +92,7 @@ You will need docker desktop on your machine to be able to run this repo. There 
   ```
   cd cqrs-plus
   ```
+
 - You will need Kafka, MongoDb and PostgreSql instances running for the two services to work. Fire the following docker-compose command to start the containers:
   ```
   docker-compose -f docker-compose.debug.yaml up -d
@@ -102,20 +103,30 @@ You will need docker desktop on your machine to be able to run this repo. There 
     <img src="Images/project-start-setup.png" alt="Multiple Start up project" />
   </p>
 
-  Please note the gateway project, if set to start will just open a console and the gatweway routes will work just fine. You may optionally choose to not start the gateway in debug mode.
+  Please note the gateway project, if set to start will open a console and the gatweway routes will work just fine. If you dont want to run the UI and just run the **Command** and **Query** service, you may choose to not start the Gateway project.
 
-- Run the solution and you should be able to see the swagger pages opening up! 
+- Run the solution and you should be able to see the swagger pages opening up!
+
   <p align="center">
-    <img src="Images/swagger.png" alt="Multiple Start up project" />
+    <img src="Images/swagger.png" alt="swagger images" />
   </p>
 
-- The docker containers running should be shut down with following command:
+  You may very well run the **command** and the **query** service individually and notice the syncronisation of data between them.
+
+- If you wish to use the UI in this mode, you will need to run the gateway too. Configure the gateway project to start as shown above. Ensure the gateway project is up and running before starting the UI in debug more. Navigate to the **frontend** directory and fire the following commands:
+  
+  ```
+  npm install
+  npm run dev
+  ```
+
+- Once done, the docker containers should be shut down with following command:
 
   ```
   docker-compose -f docker-compose.debug.yaml down
   ```
 
-#### Using Docker desktop only
+### Using Docker desktop only
 
 - Clone the repository to your local machine:
 
@@ -141,8 +152,10 @@ You will need docker desktop on your machine to be able to run this repo. There 
 
 - You will be able to access the command and lookup service using gateway only. Use the postman collection located [here](https://github.com/OxyProgrammer/cqrs-plus/blob/main/PostmanCollection/CQRSPlus.postman_collection.json) to run requests.
 
+- You can also access the UI at [http://localhost:3000](http://localhost:3000)
 
-## Contributing
+
+# Contributing
 
 Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
 
@@ -158,15 +171,16 @@ Contributions are welcome! If you'd like to contribute to this project, please f
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## Acknowledgements
+# Acknowledgements
 
 - [ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/web-api/?view=aspnetcore-8.0)
 - [Docker Desktop](https://www.docker.com/products/docker-desktop//)
 - [Swagger](https://learn.microsoft.com/en-us/aspnet/core/tutorials/web-api-help-pages-using-swagger?view=aspnetcore-8.0)
+- [NextJS](https://nextjs.org/docs)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## Contact
+# Contact
 
 If you have any questions, suggestions, or issues, please feel free to contact the project maintainer:
 
