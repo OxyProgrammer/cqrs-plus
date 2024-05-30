@@ -5,6 +5,6 @@ namespace Post.Query.Api.DTOs
 {
     public class PostLookupResponse:BaseResponse
     {
-        public List<PostEntity> Posts { get; set; }
+        public IEnumerable<PostDto> Posts { get; set; }
     }
 }

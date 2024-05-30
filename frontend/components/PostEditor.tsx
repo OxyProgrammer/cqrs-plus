@@ -44,7 +44,7 @@ const PostEditor: React.FC<PostEditorProps> = ({ post }) => {
               onClick={handleEditClick}
             >
               <Image
-                src='edit.svg'
+                src='/edit.svg'
                 alt='edit icon'
                 className='mr-2'
                 height={20}
@@ -58,7 +58,7 @@ const PostEditor: React.FC<PostEditorProps> = ({ post }) => {
             >
               <span className='mt-1'>Like</span>
               <Image
-                src='like.svg'
+                src='/like.svg'
                 alt='like icon'
                 className='ml-2'
                 height={20}

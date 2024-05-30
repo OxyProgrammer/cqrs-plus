@@ -1,5 +1,6 @@
 'use client';
-import AddPost from '@/components/AddPost';
+import Filter from '@/components/Filter';
+import PostCollection from '@/components/PostCollection';
 import {
   getAllPosts,
   getPostsByAuthor,
@@ -39,8 +40,10 @@ export default function Home() {
     setPosts(postList);
   };
 
-  return <AddPost />;
+  return (
+    <>
+      <Filter filterRequested={filterRequested} />
+      <PostCollection  posts={posts} />
+    </>
+  );
 }
-
- {/* <AlternateFilter filterRequested={filterRequested} />
-        <PostCollection posts={posts} /> */}

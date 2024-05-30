@@ -6,7 +6,7 @@ import { getRequest, getUrl } from '@/constants/appConstants';
 export const getPostById = async (postId: string): Promise<Post | null> => {
   try {
     const request: RequestInfo = new Request(
-      getUrl(`postlookup/${postId}`),
+      getUrl(`posts/${postId}`),
       getRequest('GET')
     );
     const response = await fetch(request);

@@ -22,7 +22,7 @@ const getPosts = async (request: RequestInfo): Promise<Post[]> => {
 
 export const getAllPosts = async (): Promise<Post[]> => {
   const request: RequestInfo = new Request(
-    getUrl('postlookup'),
+    getUrl('posts'),
     getRequest('GET')
   );
   return await getPosts(request);
@@ -30,7 +30,7 @@ export const getAllPosts = async (): Promise<Post[]> => {
 
 export const getPostsByAuthor = async (author: string): Promise<Post[]> => {
   const request: RequestInfo = new Request(
-    getUrl(`postlookup/byauthor/${author}`),
+    getUrl(`posts/byauthor/${author}`),
     getRequest('GET')
   );
   return await getPosts(request);
@@ -40,7 +40,7 @@ export const getPostsForMinLikes = async (
   minLikes: number
 ): Promise<Post[]> => {
   const request: RequestInfo = new Request(
-    getUrl(`postlookup/withlikes/${minLikes}`),
+    getUrl(`posts/withlikes/${minLikes}`),
     getRequest('GET')
   );
   return await getPosts(request);
@@ -48,7 +48,7 @@ export const getPostsForMinLikes = async (
 
 export const getPostsWithComments = async (): Promise<Post[]> => {
   const request: RequestInfo = new Request(
-    getUrl('postlookup/withcomments'),
+    getUrl('posts/withcomments'),
     getRequest('GET')
   );
   return await getPosts(request);
@@ -60,7 +60,7 @@ export const addNewPost = async (
 ): Promise<string> => {
   try {
     const request: RequestInfo = new Request(
-      getUrl('postlookup'),
+      getUrl('posts'),
       getRequest('POST', {
         author,
         message,
@@ -105,7 +105,7 @@ export const editPost = async (
   message: string
 ): Promise<boolean> => {
   const request: RequestInfo = new Request(
-    getUrl(`postlookup/${postId}'`),
+    getUrl(`posts/${postId}'`),
     getRequest('PUT', {
       message,
     })
@@ -115,7 +115,7 @@ export const editPost = async (
 
 export const likePost = async (postId: string): Promise<boolean> => {
   const request: RequestInfo = new Request(
-    getUrl(`postlookup/like/${postId}'`),
+    getUrl(`posts/like/${postId}'`),
     getRequest('PUT')
   );
   return await handleNonGetRequests(request);
@@ -126,7 +126,7 @@ export const deletePost = async (
   author: string
 ): Promise<boolean> => {
   const request: RequestInfo = new Request(
-    getUrl(`postlookup/${postId}'`),
+    getUrl(`posts/${postId}'`),
     getRequest('DELETE', {
       username: author,
     })
@@ -149,7 +149,7 @@ export const editComment = async (
   author: string
 ): Promise<boolean> => {
   const request: RequestInfo = new Request(
-    getUrl(`postlookup/${postId}'/comment/${commentId}`),
+    getUrl(`posts/${postId}'/comment/${commentId}`),
     getRequest('PUT', {
       comment: commentText,
       username: author,
@@ -164,7 +164,7 @@ export const deleteComment = async (
   author: string
 ): Promise<boolean> => {
   const request: RequestInfo = new Request(
-    getUrl(`postlookup/${postId}'/comment/${commentId}`),
+    getUrl(`posts/${postId}'/comment/${commentId}`),
     getRequest('DELETE', {
       username: author,
     })

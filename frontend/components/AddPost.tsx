@@ -1,11 +1,12 @@
 'use client';
 import { addNewPost } from '@/constants/clientMethods';
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 
 const AddPost: React.FC = () => {
   const [message, setMessage] = useState<string>('');
   const [author, setAuthor] = useState<string>('');
-
+  // const router = useRouter();
   const handleSaveClick = async () => {
     if (!message?.trim() || !author?.trim()) {
       alert('Both Message and Author needs to be supplied.');
@@ -13,6 +14,7 @@ const AddPost: React.FC = () => {
     }
     const newPostId = await addNewPost(message, author);
     console.log(newPostId);
+    // router.push(`post/${newPostId}`);
   };
 
   return (

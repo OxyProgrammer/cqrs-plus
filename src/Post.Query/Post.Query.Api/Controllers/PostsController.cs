@@ -14,7 +14,7 @@ namespace Post.Query.Api.Controllers
         private readonly IQueryDispatcher<PostEntity> _queryDispatcher;
         private readonly IMapper _mapper;
 
-        public PostsController(IQueryDispatcher<PostEntity> queryDispatcher,IMapper mapper)
+        public PostsController(IQueryDispatcher<PostEntity> queryDispatcher, IMapper mapper)
         {
             _queryDispatcher = queryDispatcher;
             _mapper = mapper;
@@ -24,8 +24,7 @@ namespace Post.Query.Api.Controllers
         public async Task<IActionResult> GetAllPostsAsync()
         {
             var posts = await _queryDispatcher.SendAsync(new FindAllPostQuery());
-            var postDtos = _mapper.Map<IEnumerable<PostDto>>(posts);
-            return Ok(postDtos);
+            return NormalResponse(posts);
         }
 
         [HttpGet("{postId:guid}")]
@@ -36,7 +35,8 @@ namespace Post.Query.Api.Controllers
             {
                 return NoContent();
             }
-            return Ok(posts.FirstOrDefault());
+            var postDto = _mapper.Map<PostDto>(posts.FirstOrDefault());
+            return Ok(postDto);
         }
 
         [HttpGet("byAuthor/{author}")]
@@ -67,7 +67,8 @@ namespace Post.Query.Api.Controllers
                 return NoContent();
             }
             var count = posts.Count();
-            return Ok(new PostLookupResponse() { Posts = posts, Message = $"Successfully returned {count} post{(count > 1 ? 's' : string.Empty)}" });
+
+            return Ok(new PostLookupResponse() { Posts = _mapper.Map<IEnumerable<PostDto>>(posts), Message = $"Successfully returned {count} post{(count > 1 ? 's' : string.Empty)}" });
         }
 
     }

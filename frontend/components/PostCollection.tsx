@@ -5,10 +5,6 @@ import Link from 'next/link';
 
 interface PostCollectionProps {
   posts: Post[];
-  // onDelete: (postId: string) => void;
-  // onPostClick: (postId: string) => void;
-  //, onDelete, onPostClick
-  //
 }
 
 const PostCollection: React.FC<PostCollectionProps> = ({ posts }) => {
@@ -16,7 +12,7 @@ const PostCollection: React.FC<PostCollectionProps> = ({ posts }) => {
     const images = [];
     for (let i = 0; i < numberOfImages; i++) {
       images.push(
-        <Image key={i} src='star.svg' alt='star icon' height={20} width={20} />
+        <Image key={i} src='/star.svg' alt='star icon' height={20} width={20} />
       );
     }
     return images;
@@ -29,7 +25,7 @@ const PostCollection: React.FC<PostCollectionProps> = ({ posts }) => {
           key={post.postId}
           className='border border-gray-300 p-4 mb-4 rounded shadow-lg'
         >
-          <Link href={post.postId} target={'_blank'} rel={'noreferrer'}>
+          <Link href={`post/${post.postId}`} target={'_blank'} rel={'noreferrer'}>
             <div className='font-bold overflow-hidden whitespace-nowrap cursor-pointer overflow-ellipsis'>
               {post.message}
             </div>
@@ -39,7 +35,7 @@ const PostCollection: React.FC<PostCollectionProps> = ({ posts }) => {
           <div className='flex justify-between mt-2'>
             <button className='bg-red-500 hover:bg-red-700 text-white p-2 rounded text-sm inline-flex items-center'>
               <Image
-                src='delete.svg'
+                src='/delete.svg'
                 alt='delete icon'
                 height={20}
                 width={20}
