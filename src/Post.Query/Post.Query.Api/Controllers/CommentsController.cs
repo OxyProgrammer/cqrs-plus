@@ -1,5 +1,7 @@
-﻿using CQRS.Core.Infrastructure;
+﻿using AutoMapper;
+using CQRS.Core.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using Post.Query.Api.DTOs;
 using Post.Query.Api.Queries;
 using Post.Query.Domain.Entities;
 
@@ -7,13 +9,15 @@ namespace Post.Query.Api.Controllers
 {
     [ApiController]
     [Route("api/v1/posts/{postId}/[controller]")]
-    public class CommentLookUpController : ControllerBase
+    public class CommentsController : ControllerBase
     {
         private readonly IQueryDispatcher<CommentEntity> _queryDispatcher;
+        private readonly IMapper _mapper;
 
-        public CommentLookUpController(IQueryDispatcher<CommentEntity> queryDispatcher)
+        public CommentsController(IQueryDispatcher<CommentEntity> queryDispatcher, IMapper mapper)
         {
             _queryDispatcher = queryDispatcher;
+            _mapper = mapper;
         }
 
         [HttpGet("{id:guid}")]
@@ -24,7 +28,8 @@ namespace Post.Query.Api.Controllers
             {
                 return NoContent();
             }
-            return Ok(comments.FirstOrDefault());
+            var commentDto=_mapper.Map<CommentDto>(comments.FirstOrDefault());
+            return Ok(commentDto);
         }
     }
 }
