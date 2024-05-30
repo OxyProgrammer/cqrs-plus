@@ -33,7 +33,7 @@ jobs:
       run: npm run build
 
     - name: Install dependencies for .NET solution
-      run: dotnet restore src/cqrs.sln
+      run: dotnet restore src/SM-Post.sln
 
     - name: Build .NET solution
-      run: dotnet build --configuration Release src/cqrs.sln
+      run: dotnet build --configuration Release src/SM-Post.sln
