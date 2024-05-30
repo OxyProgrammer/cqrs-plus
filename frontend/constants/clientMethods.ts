@@ -1,5 +1,5 @@
 import { Post } from '@/models/models';
-import { getGETRequest, getUrl } from '@/constants/appConstants';
+import { getRequest, getUrl } from '@/constants/appConstants';
 
 const getPosts = async (request: RequestInfo): Promise<Post[]> => {
   try {
@@ -23,7 +23,7 @@ const getPosts = async (request: RequestInfo): Promise<Post[]> => {
 export const getAllPosts = async (): Promise<Post[]> => {
   const request: RequestInfo = new Request(
     getUrl('postlookup'),
-    getGETRequest()
+    getRequest('GET')
   );
   return await getPosts(request);
 };
@@ -31,7 +31,7 @@ export const getAllPosts = async (): Promise<Post[]> => {
 export const getPostsByAuthor = async (author: string): Promise<Post[]> => {
   const request: RequestInfo = new Request(
     getUrl(`postlookup/byauthor/${author}`),
-    getGETRequest()
+    getRequest('GET')
   );
   return await getPosts(request);
 };
@@ -41,7 +41,7 @@ export const getPostsForMinLikes = async (
 ): Promise<Post[]> => {
   const request: RequestInfo = new Request(
     getUrl(`postlookup/withlikes/${minLikes}`),
-    getGETRequest()
+    getRequest('GET')
   );
   return await getPosts(request);
 };
@@ -49,7 +49,7 @@ export const getPostsForMinLikes = async (
 export const getPostsWithComments = async (): Promise<Post[]> => {
   const request: RequestInfo = new Request(
     getUrl('postlookup/withcomments'),
-    getGETRequest()
+    getRequest('GET')
   );
   return await getPosts(request);
 };
@@ -58,7 +58,116 @@ export const addNewPost = async (
   message: string,
   author: string
 ): Promise<string> => {
-  console.log(message, author);
-  const newPostId = 'P1';
-  return newPostId;
+  try {
+    const request: RequestInfo = new Request(
+      getUrl('postlookup'),
+      getRequest('POST', {
+        author,
+        message,
+      })
+    );
+    const response = await fetch(request);
+
+    if (!response.ok) {
+      console.error(`HTTP error! Status: ${response.status}`);
+      return '';
+    }
+    // Parse the JSON response
+    const data: { id: string; message: string } = await response.json();
+    return data.id;
+  } catch (error) {
+    // Handle network errors or other issues
+    console.error('Post error:', error);
+    return '';
+  }
+};
+
+const handleNonGetRequests = async (request: RequestInfo): Promise<boolean> => {
+  try {
+    const response = await fetch(request);
+    if (!response.ok) {
+      console.error(`HTTP error! Status: ${response.status}`);
+      return false;
+    }
+    // Parse the JSON response
+    const data = await response.json();
+    console.log(data);
+    return true;
+  } catch (error) {
+    // Handle network errors or other issues
+    console.error('Error:', error);
+    return false;
+  }
+};
+
+export const editPost = async (
+  postId: string,
+  message: string
+): Promise<boolean> => {
+  const request: RequestInfo = new Request(
+    getUrl(`postlookup/${postId}'`),
+    getRequest('PUT', {
+      message,
+    })
+  );
+  return await handleNonGetRequests(request);
+};
+
+export const likePost = async (postId: string): Promise<boolean> => {
+  const request: RequestInfo = new Request(
+    getUrl(`postlookup/like/${postId}'`),
+    getRequest('PUT')
+  );
+  return await handleNonGetRequests(request);
+};
+
+export const deletePost = async (
+  postId: string,
+  author: string
+): Promise<boolean> => {
+  const request: RequestInfo = new Request(
+    getUrl(`postlookup/${postId}'`),
+    getRequest('DELETE', {
+      username: author,
+    })
+  );
+  return await handleNonGetRequests(request);
+};
+
+export const addComment = async (
+  postId: string,
+  commentText: string,
+  author: string
+): Promise<boolean> => {
+  return true;
+};
+
+export const editComment = async (
+  postId: string,
+  commentId: string,
+  commentText: string,
+  author: string
+): Promise<boolean> => {
+  const request: RequestInfo = new Request(
+    getUrl(`postlookup/${postId}'/comment/${commentId}`),
+    getRequest('PUT', {
+      comment: commentText,
+      username: author,
+    })
+  );
+  return handleNonGetRequests(request);
+};
+
+export const deleteComment = async (
+  postId: string,
+  commentId: string,
+  author: string
+): Promise<boolean> => {
+  const request: RequestInfo = new Request(
+    getUrl(`postlookup/${postId}'/comment/${commentId}`),
+    getRequest('DELETE', {
+      username: author,
+    })
+  );
+  return handleNonGetRequests(request);
 };

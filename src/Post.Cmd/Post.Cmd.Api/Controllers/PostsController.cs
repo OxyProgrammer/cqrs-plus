@@ -47,7 +47,7 @@ namespace Post.Cmd.Api.Controllers
             var command = _mapper.Map<EditPostCommand>(editPostDto);
             command.Id = id;
             await _commandDispatcher.SendAsync(command);
-            return Ok("Edit message request completed successfully.");
+            return Ok("Edit post request completed successfully.");
         }
 
         /// <summary>
