@@ -53,3 +53,12 @@ export const getPostsWithComments = async (): Promise<Post[]> => {
   );
   return await getPosts(request);
 };
+
+export const addNewPost = async (
+  message: string,
+  author: string
+): Promise<string> => {
+  console.log(message, author);
+  const newPostId = 'P1';
+  return newPostId;
+};

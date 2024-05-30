@@ -1,8 +1,5 @@
 'use client';
-import AlternateFilter from '@/components/Filter';
-import Footer from '@/components/Footer';
-import Header from '@/components/Header';
-import PostCollection from '@/components/PostCollection';
+import AddPost from '@/components/AddPost';
 import {
   getAllPosts,
   getPostsByAuthor,
@@ -42,17 +39,8 @@ export default function Home() {
     setPosts(postList);
   };
 
-  return (
-    <div className='flex flex-col'>
-      {/* HEADER */}
-      <Header />
-
-      {/* Body */}
-      <main className='container mx-auto p-4 flex flex-col flex-grow min-h-screen'>
-        <AlternateFilter filterRequested={filterRequested} />
-        <PostCollection posts={posts} />
-      </main>
-      <Footer />
-    </div>
-  );
+  return <AddPost />;
 }
+
+ {/* <AlternateFilter filterRequested={filterRequested} />
+        <PostCollection posts={posts} /> */}
