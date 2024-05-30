@@ -29,6 +29,7 @@ builder.Services.AddScoped<IEventConsumer, EventConsumer>();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 builder.Services.AddControllers();
+builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddHostedService<ConsumerHostedService>();
 builder.Services.AddEndpointsApiExplorer();

@@ -1,4 +1,5 @@
-﻿using CQRS.Core.Infrastructure;
+﻿using AutoMapper;
+using CQRS.Core.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Post.Query.Api.DTOs;
 using Post.Query.Api.Queries;
@@ -8,20 +9,23 @@ namespace Post.Query.Api.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class PostLookupController : ControllerBase
+    public class PostsController : ControllerBase
     {
         private readonly IQueryDispatcher<PostEntity> _queryDispatcher;
+        private readonly IMapper _mapper;
 
-        public PostLookupController(IQueryDispatcher<PostEntity> queryDispatcher)
+        public PostsController(IQueryDispatcher<PostEntity> queryDispatcher,IMapper mapper)
         {
             _queryDispatcher = queryDispatcher;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllPostsAsync()
         {
             var posts = await _queryDispatcher.SendAsync(new FindAllPostQuery());
-            return NormalResponse(posts);
+            var postDtos = _mapper.Map<IEnumerable<PostDto>>(posts);
+            return Ok(postDtos);
         }
 
         [HttpGet("{postId:guid}")]
@@ -32,7 +36,7 @@ namespace Post.Query.Api.Controllers
             {
                 return NoContent();
             }
-            return Ok(posts.First());
+            return Ok(posts.FirstOrDefault());
         }
 
         [HttpGet("byAuthor/{author}")]

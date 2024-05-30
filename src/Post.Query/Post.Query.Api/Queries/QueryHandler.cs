@@ -37,5 +37,11 @@ namespace Post.Query.Api.Queries
         {
             return await _postRepository.ListWithLikesAsync(query.NumberOfLikes);
         }
+
+        public async Task<List<CommentEntity>> HandleAsync(FindCommentByIdQuery query)
+        {
+            var post = await _postRepository.GetByIdAsync(query.PostId);
+            return post.Comments?.Where(c=>c.CommentId == query.CommentId).ToList();
+        }
     }
 }
