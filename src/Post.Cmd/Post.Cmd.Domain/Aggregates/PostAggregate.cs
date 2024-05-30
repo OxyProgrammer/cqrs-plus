@@ -80,7 +80,7 @@ namespace Post.Cmd.Domain
         }
 
 
-        public void AddComment(string comment, string username)
+        public void AddComment(Guid commentId,string comment, string username)
         {
             if (!_active)
             {
@@ -93,7 +93,7 @@ namespace Post.Cmd.Domain
             RaiseEvent(new CommentAddedEvent
             {
                 Id = _id,
-                CommentId = Guid.NewGuid(),
+                CommentId = commentId,
                 Comment = comment,
                 Username = username,
                 CommentDate = DateTime.Now

@@ -30,10 +30,11 @@ namespace Post.Cmd.Api.Controllers
         public async Task<IActionResult> AddCommentAsync(Guid postId, [FromBody] AddCommentDto addCommentDto)
         {
             var command = _mapper.Map<AddCommentCommand>(addCommentDto);
+            var commentId = Guid.NewGuid();
             command.Id = postId;
+            command.CommentId = commentId;
             await _commandDispatcher.SendAsync(command);
-
-            return Ok("Add comment request completed successfully.");
+            return StatusCode(StatusCodes.Status201Created, new { postId, id = commentId, message = "Add comment request completed successfully." });
         }
 
         /// <summary>

@@ -9,5 +9,6 @@ namespace Post.Query.Api.Queries
         Task<List<PostEntity>> HandleAsync(FindPostsByAuthorQuery query);
         Task<List<PostEntity>> HandleAsync(FindPostsWithCommentsQuery query);
         Task<List<PostEntity>> HandleAsync(FindPostsWithLikesQuery query);
+        Task<List<CommentEntity>> HandleAsync(FindCommentByIdQuery query);
     }
 }

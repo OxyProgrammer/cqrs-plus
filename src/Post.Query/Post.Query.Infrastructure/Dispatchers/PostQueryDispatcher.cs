@@ -4,7 +4,7 @@ using Post.Query.Domain.Entities;
 
 namespace Post.Query.Infrastructure.Dispatchers
 {
-    public class QueryDispatcher : IQueryDispatcher<PostEntity>
+    public class PostQueryDispatcher : IQueryDispatcher<PostEntity>
     {
         private readonly Dictionary<Type, Func<BaseQuery, Task<List<PostEntity>>>> _handlers = new();
 

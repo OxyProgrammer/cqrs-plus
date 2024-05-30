@@ -3,7 +3,6 @@ using CQRS.Core.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Post.Cmd.Api.Commands;
 using Post.Cmd.Api.DTOs.Request;
-using Post.Cmd.Api.DTOs.Response;
 
 namespace Post.Cmd.Api.Controllers
 {
@@ -32,7 +31,7 @@ namespace Post.Cmd.Api.Controllers
             var command = _mapper.Map<NewPostCommand>(newPostDto);
             command.Id = id;
             await _commandDispatcher.SendAsync(command);
-            return StatusCode(StatusCodes.Status201Created, new NewPostResponseDto { Id = id, Message = "New post creation completed successfully." });
+            return StatusCode(StatusCodes.Status201Created, new { Id = id, Message = "New post creation completed successfully." });
         }
 
         /// <summary>

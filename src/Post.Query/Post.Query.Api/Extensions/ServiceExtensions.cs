@@ -33,15 +33,19 @@ namespace Post.Query.Api.Extensions
             {
                 var queryHandler = scope.ServiceProvider.GetRequiredService<IQueryHandler>();
 
-                var dispatcher = new QueryDispatcher();
+                var postQueryDispatcher = new PostQueryDispatcher();
+                var commentQueryDispatcher = new CommentQueryDispatcher();
 
-                dispatcher.RegisterHandler<FindAllPostQuery>(queryHandler.HandleAsync);
-                dispatcher.RegisterHandler<FindPostByIdQuery>(queryHandler.HandleAsync);
-                dispatcher.RegisterHandler<FindPostsByAuthorQuery>(queryHandler.HandleAsync);
-                dispatcher.RegisterHandler<FindPostsWithCommentsQuery>(queryHandler.HandleAsync);
-                dispatcher.RegisterHandler<FindPostsWithLikesQuery>(queryHandler.HandleAsync);
+                postQueryDispatcher.RegisterHandler<FindAllPostQuery>(queryHandler.HandleAsync);
+                postQueryDispatcher.RegisterHandler<FindPostByIdQuery>(queryHandler.HandleAsync);
+                postQueryDispatcher.RegisterHandler<FindPostsByAuthorQuery>(queryHandler.HandleAsync);
+                postQueryDispatcher.RegisterHandler<FindPostsWithCommentsQuery>(queryHandler.HandleAsync);
+                postQueryDispatcher.RegisterHandler<FindPostsWithLikesQuery>(queryHandler.HandleAsync);
 
-                services.AddSingleton<IQueryDispatcher<PostEntity>>(_ => dispatcher);
+                services.AddSingleton<IQueryDispatcher<PostEntity>>(_ => postQueryDispatcher);
+
+                commentQueryDispatcher.RegisterHandler<FindCommentByIdQuery>(queryHandler.HandleAsync);
+                services.AddSingleton<IQueryDispatcher<CommentEntity>>(_ => commentQueryDispatcher);
             }
         }
     }
