@@ -20,11 +20,26 @@ const getPosts = async (request: RequestInfo): Promise<Post[]> => {
   }
 };
 
+const handleNonGetRequests = async (request: RequestInfo): Promise<boolean> => {
+  try {
+    const response = await fetch(request);
+    if (!response.ok) {
+      console.error(`HTTP error! Status: ${response.status}`);
+      return false;
+    }
+    // Parse the JSON response
+    const data = await response.json();
+    console.log(data);
+    return true;
+  } catch (error) {
+    // Handle network errors or other issues
+    console.error('Error:', error);
+    return false;
+  }
+};
+
 export const getAllPosts = async (): Promise<Post[]> => {
-  const request: RequestInfo = new Request(
-    getUrl('posts'),
-    getRequest('GET')
-  );
+  const request: RequestInfo = new Request(getUrl('posts'), getRequest('GET'));
   return await getPosts(request);
 };
 
@@ -82,30 +97,12 @@ export const addNewPost = async (
   }
 };
 
-const handleNonGetRequests = async (request: RequestInfo): Promise<boolean> => {
-  try {
-    const response = await fetch(request);
-    if (!response.ok) {
-      console.error(`HTTP error! Status: ${response.status}`);
-      return false;
-    }
-    // Parse the JSON response
-    const data = await response.json();
-    console.log(data);
-    return true;
-  } catch (error) {
-    // Handle network errors or other issues
-    console.error('Error:', error);
-    return false;
-  }
-};
-
 export const editPost = async (
   postId: string,
   message: string
 ): Promise<boolean> => {
   const request: RequestInfo = new Request(
-    getUrl(`posts/${postId}'`),
+    getUrl(`posts/${postId}`),
     getRequest('PUT', {
       message,
     })
@@ -115,7 +112,7 @@ export const editPost = async (
 
 export const likePost = async (postId: string): Promise<boolean> => {
   const request: RequestInfo = new Request(
-    getUrl(`posts/like/${postId}'`),
+    getUrl(`posts/like/${postId}`),
     getRequest('PUT')
   );
   return await handleNonGetRequests(request);
@@ -138,8 +135,29 @@ export const addComment = async (
   postId: string,
   commentText: string,
   author: string
-): Promise<boolean> => {
-  return true;
+): Promise<{ success: boolean; commentId: string }> => {
+  try {
+    const request: RequestInfo = new Request(
+      getUrl(`posts/${postId}/comments`),
+      getRequest('POST', {
+        comment: commentText,
+        username: author,
+      })
+    );
+    const response = await fetch(request);
+
+    if (!response.ok) {
+      console.error(`HTTP error! Status: ${response.status}`);
+      return { success: false, commentId: '' };
+    }
+    // Parse the JSON response
+    const data: { id: string; message: string } = await response.json();
+    return { success: true, commentId: data.id };
+  } catch (error) {
+    // Handle network errors or other issues
+    console.error('Post error:', error);
+    return { success: false, commentId: '' };
+  }
 };
 
 export const editComment = async (

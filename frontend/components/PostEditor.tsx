@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Post } from '@/models/models';
+import { editPost, likePost } from '@/constants/clientMethods';
 
 interface PostEditorProps {
   post: Post;
@@ -17,16 +18,28 @@ const PostEditor: React.FC<PostEditorProps> = ({ post }) => {
   };
 
   const handleCancelClick = () => {
-    setMessage(post.message)
-    setAuthor(post.author)
-    setEditMode(false);
-  };
-  
-  const handleLikeClick = () => {
+    setMessage(post.message);
+    setAuthor(post.author);
     setEditMode(false);
   };
 
-  const handleSaveClick = () => {
+  const handleLikeClick = async () => {
+    const ret = await likePost(post.postId);
+    if (ret) {
+      console.log('successfully liked post');
+    } else {
+      console.log('some error occurred while liking post');
+    }
+  };
+
+  const handleSaveClick = async () => {
+    const ret = await editPost(post.postId, message);
+    if (ret) {
+      console.log('successfully edited post');
+    } else {
+      console.log('some error occurred while editing post');
+    }
+
     setEditMode(false);
   };
 

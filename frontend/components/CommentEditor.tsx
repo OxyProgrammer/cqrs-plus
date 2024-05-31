@@ -10,18 +10,16 @@ interface CommentEditorProps {
 const CommentEditor: React.FC<CommentEditorProps> = ({ comment }) => {
   
     const [editMode, setEditMode] = useState(false);
-    const [message, setMessage] = useState('This is a new comment given');
-    const [author, setAuthor] = useState('Jane Doe');
+    const [message, setMessage] = useState(comment.comment);
+    const [author, setAuthor] = useState(comment.username);
 
     const handleEditClick = () => {
       setEditMode(true);
     };
+
     const handleCancelClick = () => {
-      setMessage('')
-      setAuthor('')
-      setEditMode(false);
-    };
-    const handleLikeClick = () => {
+      setMessage(comment.comment)
+      setAuthor(comment.username)
       setEditMode(false);
     };
   
@@ -43,7 +41,18 @@ const CommentEditor: React.FC<CommentEditorProps> = ({ comment }) => {
                 onClick={handleEditClick}
               >
                 <Image
-                  src='edit.svg'
+                  src='/edit.svg'
+                  alt='edit icon'
+                  height={15}
+                  width={15}
+                />
+              </button>
+              <button
+                className=' bg-red-500 hover:bg-red-700 text-white p-2 rounded inline-flex items-center ml-2'
+                onClick={handleEditClick}
+              >
+                <Image
+                  src='/delete.svg'
                   alt='edit icon'
                   height={15}
                   width={15}
@@ -53,14 +62,14 @@ const CommentEditor: React.FC<CommentEditorProps> = ({ comment }) => {
           </>
         ) : (
           <>
-            <div className='font-bold text-lg mb-1'>Post Content:</div>
+            <div className='font-bold text mb-1'>Comment Content:</div>
             <textarea
               className='block border w-full mb-4 rounded border-spacing-1 px-2 py-1'
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               rows={3}
             />
-            <div className='font-bold text-lg mb-1'>Author:</div>
+            <div className='font-bold text mb-1'>Author:</div>
             <input
               value={author}
               onChange={(e) => setAuthor(e.target.value)}

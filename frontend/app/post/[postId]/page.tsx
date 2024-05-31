@@ -22,7 +22,7 @@ const PostPage = async ({ params }: PostPageProps) => {
         <div className='border-b-2 border-gray-300 mb-5'>
           <PostEditor post={post} />
         </div>
-        <CommentsCollection comments={post.comments} />
+        <CommentsCollection post={post} />
       </div>
     </div>
   );
