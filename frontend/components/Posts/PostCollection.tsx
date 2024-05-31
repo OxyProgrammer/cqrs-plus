@@ -1,20 +1,31 @@
 import React from 'react';
 import Link from 'next/link';
+import toast from 'react-hot-toast';
 import { Post } from '@/models/models';
 import { IoStar } from 'react-icons/io5';
 import { FaRegTrashAlt } from 'react-icons/fa';
+import { deletePost } from '@/utility/clientMethods';
 
 interface PostCollectionProps {
   posts: Post[];
 }
 
 const PostCollection: React.FC<PostCollectionProps> = ({ posts }) => {
-  const getFavouriteStars = (numberOfImages: number): React.ReactNode => {
+  const getLikeStars = (numberOfImages: number): React.ReactNode => {
     const stars = [];
     for (let i = 0; i < numberOfImages; i++) {
-      stars.push(<IoStar color='#FFAC33' />);
+      stars.push(<IoStar key={i} color='#FFAC33' />);
     }
     return stars;
+  };
+
+  const onDeletePostRequested = async (postId: string, author: string) => {
+    const ret = await deletePost(postId, author);
+    if (ret) {
+      toast.success('Successfully deleted post! Please refresh page!');
+    } else {
+      toast.error('Some error occurred while deleting post!');
+    }
   };
 
   return (
@@ -36,11 +47,14 @@ const PostCollection: React.FC<PostCollectionProps> = ({ posts }) => {
 
           <div className='text-gray-500'>{post.author}</div>
           <div className='flex justify-between mt-2'>
-            <button className='bg-red-500 hover:bg-red-700 text-white p-2 rounded text-sm inline-flex items-center'>
+            <button
+              className='bg-red-500 hover:bg-red-700 text-white p-2 rounded text-sm inline-flex items-center'
+              onClick={() => onDeletePostRequested(post.postId, post.author)}
+            >
               <FaRegTrashAlt />
             </button>
             <div className='flex flex-wrap justify-center'>
-              {getFavouriteStars(post.likes)}
+              {getLikeStars(post.likes)}
             </div>
           </div>
         </div>

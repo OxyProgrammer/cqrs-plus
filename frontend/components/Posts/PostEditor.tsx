@@ -13,6 +13,7 @@ interface PostEditorProps {
 }
 
 const PostEditor: React.FC<PostEditorProps> = ({ post }) => {
+  
   const [editMode, setEditMode] = useState(false);
   const [message, setMessage] = useState(post.message);
   const [author, setAuthor] = useState(post.author);
@@ -47,11 +48,11 @@ const PostEditor: React.FC<PostEditorProps> = ({ post }) => {
     setEditMode(false);
   };
 
-  const getFavouriteStars=(numberOfImages: number): React.ReactNode =>{
+  const getLikeStars=(numberOfImages: number): React.ReactNode =>{
     const stars = [];
     for (let i = 0; i < numberOfImages; i++) {
       stars.push(
-        <IoStar color='#FFAC33'/>
+        <IoStar key={i} color='#FFAC33'/>
       );
     }
     return stars;
@@ -66,7 +67,7 @@ const PostEditor: React.FC<PostEditorProps> = ({ post }) => {
           </div>
           <div className='text-gray-500 text-xl'>{post.author}</div>
           <div className='flex flex-wrap justify-end'>
-            {getFavouriteStars(post.likes)}
+            {getLikeStars(post.likes)}
           </div>
           <div className='flex justify-between my-2'>
             <button
@@ -101,7 +102,7 @@ const PostEditor: React.FC<PostEditorProps> = ({ post }) => {
             className='block border w-full mb-4 text-sm p-2'
           />
           <div className='flex flex-wrap justify-end'>
-            {getFavouriteStars(post.likes)}
+            {getLikeStars(post.likes)}
           </div>
           <div className='flex justify-between my-2'>
             <button

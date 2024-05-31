@@ -2,27 +2,28 @@
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { addComment, getCommentById } from '@/utility/clientMethods';
-import { Post } from '@/models/models';
+import { Comment } from '@/models/models';
 import { FaRegSave } from 'react-icons/fa';
 
 interface AddCommentComponentProps {
-  post: Post;
+  postId: string;
+  commentAdded: (newComment: Comment) => void;
 }
 
-const AddCommentComponent: React.FC<AddCommentComponentProps> = ({ post }) => {
+const AddCommentComponent: React.FC<AddCommentComponentProps> = ({ postId,commentAdded }) => {
   const [message, setMessage] = useState<string>('');
   const [author, setAuthor] = useState<string>('');
 
   const handleSaveClick = async () => {
     const { success, commentId } = await addComment(
-      post.postId,
+      postId,
       message,
       author
     );
     if (success) {
-      var newComment = await getCommentById(post.postId, commentId);
+      var newComment = await getCommentById(postId, commentId);
       if (newComment) {
-        post.comments.push(newComment);
+        commentAdded(newComment)
         toast.success('Comment added successfully!');
         setMessage('');
         setAuthor('');
@@ -54,7 +55,7 @@ const AddCommentComponent: React.FC<AddCommentComponentProps> = ({ post }) => {
           className='bg-blue-500 hover:bg-blue-700 text-white text-lg py-1 px-2 rounded inline-flex items-center'
           onClick={handleSaveClick}
         >
-           <FaRegSave/>
+          <FaRegSave />
           <span className='mt-1 ml-1 text-sm'>Save</span>
         </button>
       </div>

@@ -1,16 +1,19 @@
 'use client';
 import React, { useState } from 'react';
 import { Comment } from '@/models/models';
-import { editComment } from '@/utility/clientMethods';
-import { MdEdit } from "react-icons/md";
-import { FaRegTrashAlt } from "react-icons/fa";
+import { deleteComment, editComment } from '@/utility/clientMethods';
+import toast from 'react-hot-toast';
+import { MdEdit } from 'react-icons/md';
+import { FaRegTrashAlt } from 'react-icons/fa';
 
 interface CommentDisplayEditorComponentProps {
   comment: Comment;
+  commentRemoved: (commentId: string) => void;
 }
 
-const CommentDisplayEditorComponent: React.FC<CommentDisplayEditorComponentProps> = ({ comment }) => {
-
+const CommentDisplayEditorComponent: React.FC<
+  CommentDisplayEditorComponentProps
+> = ({ comment, commentRemoved }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
   const [message, setMessage] = useState<string>(comment.comment);
   const [author, setAuthor] = useState<string>(comment.username);
@@ -34,11 +37,24 @@ const CommentDisplayEditorComponent: React.FC<CommentDisplayEditorComponentProps
     );
     if (ret) {
       setEditMode(false);
-      console.log('Comment edited successfully!');
+      toast.success('Comment removed successfully!');
     } else {
-      console.log('Some error occurred while updating comment.');
+      toast.error('Some error occurred while updating comment.');
     }
-    
+  };
+
+  const handleDeleteClick = async () => {
+    const ret = await deleteComment(
+      comment.postId,
+      comment.commentId,
+      comment.username
+    );
+    if (ret) {
+      commentRemoved(comment.commentId);
+      console.log('Comment deleted successfully!');
+    } else {
+      console.log('Some error occurred while deleting comment.');
+    }
   };
 
   return (
@@ -54,13 +70,13 @@ const CommentDisplayEditorComponent: React.FC<CommentDisplayEditorComponentProps
               className=' bg-blue-500 hover:bg-blue-700 text-white p-2 rounded inline-flex items-center'
               onClick={handleEditClick}
             >
-              <MdEdit/>
+              <MdEdit />
             </button>
             <button
               className=' bg-red-500 hover:bg-red-700 text-white p-2 rounded inline-flex items-center ml-2'
-              onClick={handleEditClick}
+              onClick={handleDeleteClick}
             >
-              <FaRegTrashAlt/>
+              <FaRegTrashAlt />
             </button>
           </div>
         </>

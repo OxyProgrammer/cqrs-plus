@@ -149,7 +149,7 @@ export const deletePost = async (
   author: string
 ): Promise<boolean> => {
   const request: RequestInfo = new Request(
-    getUrl(`posts/${postId}'`),
+    getUrl(`posts/${postId}`),
     getRequest('DELETE', {
       username: author,
     })
@@ -208,7 +208,7 @@ export const deleteComment = async (
   author: string
 ): Promise<boolean> => {
   const request: RequestInfo = new Request(
-    getUrl(`posts/${postId}'/comment/${commentId}`),
+    getUrl(`posts/${postId}/comments/${commentId}`),
     getRequest('DELETE', {
       username: author,
     })

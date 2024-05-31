@@ -25,7 +25,6 @@ export default function Home() {
   }, []);
 
   const filterRequested = async (filterArguments: FilterArgs) => {
-    console.log('Reached here')
     const { filterCriteria, filterData } = filterArguments;
     let postList: Post[] = [];
     switch (filterCriteria) {
