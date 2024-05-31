@@ -4,8 +4,8 @@ import toast from 'react-hot-toast';
 import { addComment, getCommentById } from '@/utility/clientMethods';
 import { Comment } from '@/models/models';
 import { FaRegSave } from 'react-icons/fa';
-import SmartButton from '../SmartButton';
-import { SmartButtonTheme } from '../SmartButton/SmartButtonTheme';
+import SmartButton from '@/components/SmartButton';
+import { SmartButtonTheme } from '@/components/SmartButton/SmartButtonTheme';
 
 interface AddCommentComponentProps {
   postId: string;
