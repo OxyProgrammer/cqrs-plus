@@ -167,7 +167,7 @@ export const editComment = async (
   author: string
 ): Promise<boolean> => {
   const request: RequestInfo = new Request(
-    getUrl(`posts/${postId}'/comment/${commentId}`),
+    getUrl(`posts/${postId}/comments/${commentId}`),
     getRequest('PUT', {
       comment: commentText,
       username: author,
