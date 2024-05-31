@@ -1,7 +1,7 @@
-import CommentsCollection from '@/components/CommentsCollection';
-import PostEditor from '@/components/PostEditor';
-import { getPostById } from '@/constants/serverMethods';
-import { Post, getDummyPostById } from '@/models/models';
+import CommentsDashBoardComponent from '@/components/Comments/CommentsDashBoardComponent';
+import PostEditor from '@/components/Posts/PostEditor';
+import { getPostById } from '@/utility/serverMethods';
+import { Post } from '@/models/models';
 import { notFound } from 'next/navigation';
 import React from 'react';
 
@@ -22,7 +22,7 @@ const PostPage = async ({ params }: PostPageProps) => {
         <div className='border-b-2 border-gray-300 mb-5'>
           <PostEditor post={post} />
         </div>
-        <CommentsCollection post={post} />
+        <CommentsDashBoardComponent post={post} />
       </div>
     </div>
   );

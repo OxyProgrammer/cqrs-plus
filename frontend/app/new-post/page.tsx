@@ -1,4 +1,4 @@
-import AddPost from '@/components/AddPost';
+import AddPost from '@/components/Posts/AddPost';
 import React from 'react';
 
 const NewPostPage: React.FC = () => {

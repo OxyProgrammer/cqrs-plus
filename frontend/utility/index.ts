@@ -1,4 +1,3 @@
-import { Post } from '@/models/models';
 
 const BASE_URL: string = 'http://localhost:5000/api/v1';
 export const getUrl = (relativeUrl: string): string => {

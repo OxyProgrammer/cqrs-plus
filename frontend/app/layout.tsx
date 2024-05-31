@@ -3,6 +3,7 @@ import { roboto } from './fonts';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: 'CQRS+',
@@ -20,6 +21,7 @@ export default function RootLayout({
         <div className='flex flex-col'>
           <Header />
           <main className='container mx-auto p-4 flex flex-col flex-grow min-h-screen'>
+            <Toaster position='bottom-left' />
             {children}
           </main>
           <Footer />

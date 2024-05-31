@@ -1,22 +1,21 @@
-import { Post } from '@/models/models';
-import Image from 'next/image';
 import React from 'react';
 import Link from 'next/link';
+import { Post } from '@/models/models';
+import { IoStar } from 'react-icons/io5';
+import { FaRegTrashAlt } from 'react-icons/fa';
 
 interface PostCollectionProps {
   posts: Post[];
 }
 
 const PostCollection: React.FC<PostCollectionProps> = ({ posts }) => {
-  function getFavouriteStars(numberOfImages: number): React.ReactNode {
-    const images = [];
+  const getFavouriteStars = (numberOfImages: number): React.ReactNode => {
+    const stars = [];
     for (let i = 0; i < numberOfImages; i++) {
-      images.push(
-        <Image key={i} src='/star.svg' alt='star icon' height={20} width={20} />
-      );
+      stars.push(<IoStar color='#FFAC33' />);
     }
-    return images;
-  }
+    return stars;
+  };
 
   return (
     <div>
@@ -25,7 +24,11 @@ const PostCollection: React.FC<PostCollectionProps> = ({ posts }) => {
           key={post.postId}
           className='border border-gray-300 p-4 mb-4 rounded shadow-lg'
         >
-          <Link href={`post/${post.postId}`} target={'_blank'} rel={'noreferrer'}>
+          <Link
+            href={`posts/${post.postId}`}
+            target={'_blank'}
+            rel={'noreferrer'}
+          >
             <div className='font-bold overflow-hidden whitespace-nowrap cursor-pointer overflow-ellipsis'>
               {post.message}
             </div>
@@ -34,12 +37,7 @@ const PostCollection: React.FC<PostCollectionProps> = ({ posts }) => {
           <div className='text-gray-500'>{post.author}</div>
           <div className='flex justify-between mt-2'>
             <button className='bg-red-500 hover:bg-red-700 text-white p-2 rounded text-sm inline-flex items-center'>
-              <Image
-                src='/delete.svg'
-                alt='delete icon'
-                height={20}
-                width={20}
-              />
+              <FaRegTrashAlt />
             </button>
             <div className='flex flex-wrap justify-center'>
               {getFavouriteStars(post.likes)}

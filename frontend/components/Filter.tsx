@@ -1,11 +1,13 @@
 'use client';
 import { FilterArgs } from '@/models/models';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 
 interface FilterProps {
   filterRequested: (filterArguments: FilterArgs) => Promise<void>;
 }
 const Filter: React.FC<FilterProps> = ({ filterRequested }) => {
+  
   const [selectedOption, setSelectedOption] = useState<string>('None');
   const [author, setAuthor] = useState<string>('');
   const [minLikes, setMinLikes] = useState<number>(0);
@@ -32,6 +34,7 @@ const Filter: React.FC<FilterProps> = ({ filterRequested }) => {
         break;
       case 'Author':
         if (!author) {
+          toast.error('Provide Author.')
           alert('Provide Author.');
           return;
         }
@@ -39,13 +42,14 @@ const Filter: React.FC<FilterProps> = ({ filterRequested }) => {
         break;
       case 'MinLikes':
         if (!minLikes) {
+          toast.error('Provide Minimum Likes.')
           alert('Provide Minimum Likes.');
           return;
         }
         filterArgs.filterData = minLikes;
         break;
       default:
-        alert('Some error happened!');
+        toast.error('Some error happened!')
         break;
     }
     await filterRequested(filterArgs);

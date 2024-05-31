@@ -1,17 +1,19 @@
 'use client';
 import React, { useState } from 'react';
-import Image from 'next/image';
 import { Comment } from '@/models/models';
-import { editComment } from '@/constants/clientMethods';
+import { editComment } from '@/utility/clientMethods';
+import { MdEdit } from "react-icons/md";
+import { FaRegTrashAlt } from "react-icons/fa";
 
-interface CommentEditorProps {
+interface CommentDisplayEditorComponentProps {
   comment: Comment;
 }
 
-const CommentEditor: React.FC<CommentEditorProps> = ({ comment }) => {
-  const [editMode, setEditMode] = useState(false);
-  const [message, setMessage] = useState(comment.comment);
-  const [author, setAuthor] = useState(comment.username);
+const CommentDisplayEditorComponent: React.FC<CommentDisplayEditorComponentProps> = ({ comment }) => {
+
+  const [editMode, setEditMode] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>(comment.comment);
+  const [author, setAuthor] = useState<string>(comment.username);
 
   const handleEditClick = () => {
     setEditMode(true);
@@ -31,8 +33,8 @@ const CommentEditor: React.FC<CommentEditorProps> = ({ comment }) => {
       author
     );
     if (ret) {
-      console.log('Comment edited successfully!');
       setEditMode(false);
+      console.log('Comment edited successfully!');
     } else {
       console.log('Some error occurred while updating comment.');
     }
@@ -52,13 +54,13 @@ const CommentEditor: React.FC<CommentEditorProps> = ({ comment }) => {
               className=' bg-blue-500 hover:bg-blue-700 text-white p-2 rounded inline-flex items-center'
               onClick={handleEditClick}
             >
-              <Image src='/edit.svg' alt='edit icon' height={15} width={15} />
+              <MdEdit/>
             </button>
             <button
               className=' bg-red-500 hover:bg-red-700 text-white p-2 rounded inline-flex items-center ml-2'
               onClick={handleEditClick}
             >
-              <Image src='/delete.svg' alt='edit icon' height={15} width={15} />
+              <FaRegTrashAlt/>
             </button>
           </div>
         </>
@@ -97,4 +99,4 @@ const CommentEditor: React.FC<CommentEditorProps> = ({ comment }) => {
   );
 };
 
-export default CommentEditor;
+export default CommentDisplayEditorComponent;

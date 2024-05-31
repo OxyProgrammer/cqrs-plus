@@ -1,5 +1,5 @@
-import { Post } from '@/models/models';
-import { getRequest, getUrl } from '@/constants/appConstants';
+import { Post, Comment } from '@/models/models';
+import { getRequest, getUrl } from '@/utility';
 
 const getPosts = async (request: RequestInfo): Promise<Post[]> => {
   try {
@@ -35,6 +35,32 @@ const handleNonGetRequests = async (request: RequestInfo): Promise<boolean> => {
     // Handle network errors or other issues
     console.error('Error:', error);
     return false;
+  }
+};
+
+export const getCommentById = async (
+  postId: string,
+  commentId: string
+): Promise<Comment | undefined> => {
+  try {
+    const request: RequestInfo = new Request(
+      getUrl(`posts/${postId}/comments/${commentId}`),
+      getRequest('GET')
+    );
+    const response = await fetch(request);
+
+    // Check if the response is OK (status code 200-299)
+    if (!response.ok) {
+      console.error(`HTTP error! Status: ${response.status}`);
+      return undefined;
+    }
+    // Parse the JSON response
+    const data = await response.json();
+    return data as Comment;
+  } catch (error) {
+    // Handle network errors or other issues
+    console.error('Fetch error:', error);
+    return undefined;
   }
 };
 

@@ -1,7 +1,6 @@
 'use server';
-
 import { Post } from '@/models/models';
-import { getRequest, getUrl } from '@/constants/appConstants';
+import { getRequest, getUrl } from '@/utility';
 
 export const getPostById = async (postId: string): Promise<Post | null> => {
   try {

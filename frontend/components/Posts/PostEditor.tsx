@@ -1,8 +1,12 @@
 'use client';
 import React, { useState } from 'react';
-import Image from 'next/image';
 import { Post } from '@/models/models';
-import { editPost, likePost } from '@/constants/clientMethods';
+import { editPost, likePost } from '@/utility/clientMethods';
+import { MdEdit } from 'react-icons/md';
+import { AiOutlineLike } from 'react-icons/ai';
+import { MdCancel } from "react-icons/md";
+import { FaRegSave } from "react-icons/fa";
+import { IoStar } from "react-icons/io5";
 
 interface PostEditorProps {
   post: Post;
@@ -43,6 +47,16 @@ const PostEditor: React.FC<PostEditorProps> = ({ post }) => {
     setEditMode(false);
   };
 
+  const getFavouriteStars=(numberOfImages: number): React.ReactNode =>{
+    const stars = [];
+    for (let i = 0; i < numberOfImages; i++) {
+      stars.push(
+        <IoStar color='#FFAC33'/>
+      );
+    }
+    return stars;
+  }
+
   return (
     <div>
       {!editMode ? (
@@ -51,32 +65,23 @@ const PostEditor: React.FC<PostEditorProps> = ({ post }) => {
             {message}
           </div>
           <div className='text-gray-500 text-xl'>{post.author}</div>
+          <div className='flex flex-wrap justify-end'>
+            {getFavouriteStars(post.likes)}
+          </div>
           <div className='flex justify-between my-2'>
             <button
               className=' bg-blue-500 hover:bg-blue-700 text-white text-lg px-2 py-1 rounded inline-flex items-center'
               onClick={handleEditClick}
             >
-              <Image
-                src='/edit.svg'
-                alt='edit icon'
-                className='mr-2'
-                height={20}
-                width={20}
-              />
-              <span className='mt-1'>Edit</span>
+              <MdEdit />
+              <span className='ml-1'>Edit</span>
             </button>
             <button
               className='bg-green-700 hover:bg-green-900 text-white px-2 py-1 text-lg rounded inline-flex items-center'
               onClick={handleLikeClick}
             >
-              <span className='mt-1'>Like</span>
-              <Image
-                src='/like.svg'
-                alt='like icon'
-                className='ml-2'
-                height={20}
-                width={20}
-              />
+              <span className='mr-1'>Like</span>
+              <AiOutlineLike />
             </button>
           </div>
         </>
@@ -95,18 +100,23 @@ const PostEditor: React.FC<PostEditorProps> = ({ post }) => {
             onChange={(e) => setAuthor(e.target.value)}
             className='block border w-full mb-4 text-sm p-2'
           />
+          <div className='flex flex-wrap justify-end'>
+            {getFavouriteStars(post.likes)}
+          </div>
           <div className='flex justify-between my-2'>
             <button
-              className='bg-red-500 hover:bg-red-700 text-white text-lg py-1 px-2 rounded'
+              className='bg-red-500 hover:bg-red-700 text-white text-lg py-1 px-2 rounded inline-flex items-center'
               onClick={handleCancelClick}
             >
-              Cancel
+              <MdCancel/>
+              <span className='ml-1'>Cancel</span>
             </button>
             <button
-              className='bg-blue-500 hover:bg-blue-700 text-white text-lg py-1 px-2 rounded'
+              className='bg-blue-500 hover:bg-blue-700 text-white text-lg py-1 px-2 rounded inline-flex items-center'
               onClick={handleSaveClick}
             >
-              Save
+              <FaRegSave/>
+              <span className='ml-1'>Save</span>
             </button>
           </div>
         </>

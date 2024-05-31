@@ -1,11 +1,14 @@
 'use client';
-import { addNewPost } from '@/constants/clientMethods';
+import { addNewPost } from '@/utility/clientMethods';
 import React, { useState } from 'react';
+import { FaRegSave } from "react-icons/fa";
 import { useRouter } from 'next/router';
 
 const AddPost: React.FC = () => {
+
   const [message, setMessage] = useState<string>('');
   const [author, setAuthor] = useState<string>('');
+
   // const router = useRouter();
   const handleSaveClick = async () => {
     if (!message?.trim() || !author?.trim()) {
@@ -34,10 +37,11 @@ const AddPost: React.FC = () => {
       />
       <div className='flex justify-end my-2'>
         <button
-          className='bg-blue-500 hover:bg-blue-700 text-white text-lg py-1 px-2 rounded'
+          className='bg-blue-500 hover:bg-blue-700 text-white text-lg py-1 px-2 rounded inline-flex items-center'
           onClick={handleSaveClick}
         >
-          Save
+           <FaRegSave/>
+          <span className='ml-1'>Save</span>
         </button>
       </div>
     </div>
