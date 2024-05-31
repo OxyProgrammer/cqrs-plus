@@ -4,34 +4,40 @@ import toast from 'react-hot-toast';
 import { addComment, getCommentById } from '@/utility/clientMethods';
 import { Comment } from '@/models/models';
 import { FaRegSave } from 'react-icons/fa';
+import SmartButton from '../SmartButton';
+import { SmartButtonTheme } from '../SmartButton/SmartButtonTheme';
 
 interface AddCommentComponentProps {
   postId: string;
   commentAdded: (newComment: Comment) => void;
 }
 
-const AddCommentComponent: React.FC<AddCommentComponentProps> = ({ postId,commentAdded }) => {
+const AddCommentComponent: React.FC<AddCommentComponentProps> = ({
+  postId,
+  commentAdded,
+}) => {
   const [message, setMessage] = useState<string>('');
   const [author, setAuthor] = useState<string>('');
+  const [isBusy, setIsBusy] = useState<boolean>(false);
 
   const handleSaveClick = async () => {
-    const { success, commentId } = await addComment(
-      postId,
-      message,
-      author
-    );
+    setIsBusy(true)
+    const { success, commentId } = await addComment(postId, message, author);
     if (success) {
       var newComment = await getCommentById(postId, commentId);
       if (newComment) {
-        commentAdded(newComment)
+        commentAdded(newComment);
         toast.success('Comment added successfully!');
         setMessage('');
         setAuthor('');
+        setIsBusy(false)
       } else {
         toast.error('Could not get the comment from read service!');
+        setIsBusy(false)
       }
     } else {
       toast.error('Some error occurred while adding comment!');
+      setIsBusy(false)
     }
   };
 
@@ -51,13 +57,10 @@ const AddCommentComponent: React.FC<AddCommentComponentProps> = ({ postId,commen
         className='block border w-full mb-4 text-sm p-2'
       />
       <div className='flex justify-between my-2'>
-        <button
-          className='bg-blue-500 hover:bg-blue-700 text-white text-lg py-1 px-2 rounded inline-flex items-center'
-          onClick={handleSaveClick}
-        >
+        <SmartButton onClick={handleSaveClick} isBusy={isBusy} theme={SmartButtonTheme.Primary}>
           <FaRegSave />
           <span className='mt-1 ml-1 text-sm'>Save</span>
-        </button>
+        </SmartButton>
       </div>
     </>
   );
