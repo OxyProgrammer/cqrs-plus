@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Post } from '@/models/models';
 import { editPost, likePost } from '@/utility/clientMethods';
@@ -15,13 +15,29 @@ interface PostEditorProps {
   post: Post;
 }
 
+const getLikeStars = (numberOfImages: number): React.ReactNode => {
+  const stars = [];
+  for (let i = 0; i < numberOfImages; i++) {
+    stars.push(<IoStar key={i} color='#FFAC33' />);
+  }
+  return stars;
+};
+
 const PostEditor: React.FC<PostEditorProps> = ({ post }) => {
   const [isBusy, setIsBusy] = useState<boolean>(false);
   const [editMode, setEditMode] = useState<boolean>(false);
   const [message, setMessage] = useState<string>(post.message);
   const [author, setAuthor] = useState<string>(post.author);
   const [likes, setLikes] = useState<number>(post.likes);
+  const [starsUi, setStarsUi] = useState<React.ReactNode>(
+    getLikeStars(post.likes)
+  );
 
+  useEffect(() => {
+    console.log('Update stars called');
+    console.log(likes);
+    setStarsUi(getLikeStars(likes));
+  }, [likes]);
   const handleEditClick = () => {
     setEditMode(true);
   };
@@ -37,7 +53,7 @@ const PostEditor: React.FC<PostEditorProps> = ({ post }) => {
     const ret = await likePost(post.postId);
     if (ret) {
       setLikes((prevLike) => prevLike + 1);
-      console.log(likes);
+
       toast.success('Successfully liked post!');
     } else {
       toast.error('Some error occurred while liking post!');
@@ -57,14 +73,6 @@ const PostEditor: React.FC<PostEditorProps> = ({ post }) => {
     setEditMode(false);
   };
 
-  const getLikeStars = (numberOfImages: number): React.ReactNode => {
-    const stars = [];
-    for (let i = 0; i < numberOfImages; i++) {
-      stars.push(<IoStar key={i} color='#FFAC33' />);
-    }
-    return stars;
-  };
-
   return (
     <div>
       {!editMode ? (
@@ -74,7 +82,7 @@ const PostEditor: React.FC<PostEditorProps> = ({ post }) => {
           </div>
           <div className='text-gray-500 text-xl'>{post.author}</div>
           <div className='flex flex-wrap justify-end'>
-            {getLikeStars(post.likes)}
+            {starsUi}
           </div>
           <div className='flex justify-between my-2'>
             <SmartButton
@@ -110,9 +118,7 @@ const PostEditor: React.FC<PostEditorProps> = ({ post }) => {
             onChange={(e) => setAuthor(e.target.value)}
             className='block border w-full mb-4 text-sm p-2'
           />
-          <div className='flex flex-wrap justify-end'>
-            {getLikeStars(likes)}
-          </div>
+          <div className='flex flex-wrap justify-end'>{starsUi}</div>
           <div className='flex justify-between my-2'>
             <SmartButton
               onClick={handleCancelClick}
