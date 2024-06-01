@@ -34,8 +34,6 @@ const PostEditor: React.FC<PostEditorProps> = ({ post }) => {
   );
 
   useEffect(() => {
-    console.log('Update stars called');
-    console.log(likes);
     setStarsUi(getLikeStars(likes));
   }, [likes]);
   const handleEditClick = () => {
