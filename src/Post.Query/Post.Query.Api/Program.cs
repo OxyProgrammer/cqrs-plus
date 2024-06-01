@@ -12,7 +12,7 @@ using Post.Query.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-Action<DbContextOptionsBuilder> configureDbContext = o =>o.UseLazyLoadingProxies()
+Action<DbContextOptionsBuilder> configureDbContext = o => o.UseLazyLoadingProxies()
 .UseNpgsql(builder.Configuration.GetConnectionString("PostgreSql"));
 
 //Add services to the container.
@@ -40,6 +40,7 @@ builder.Services.EsnureDbCreated();
 
 var app = builder.Build();
 
+app.UseExceptionHandler(_ => { }); ;//Microsoft should consider stopping being stupid!
 app.UseSwagger();
 app.UseSwaggerUI();
 

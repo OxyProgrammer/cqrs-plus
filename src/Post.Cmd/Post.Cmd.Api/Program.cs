@@ -51,7 +51,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-
+app.UseExceptionHandler(_ => { });//Microsoft should consider stopping being stupid!
 app.UseSwagger();
 app.UseSwaggerUI();
 
