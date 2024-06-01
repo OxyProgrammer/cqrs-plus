@@ -51,7 +51,6 @@ const PostEditor: React.FC<PostEditorProps> = ({ post }) => {
     const ret = await likePost(post.postId);
     if (ret) {
       setLikes((prevLike) => prevLike + 1);
-
       toast.success('Successfully liked post!');
     } else {
       toast.error('Some error occurred while liking post!');

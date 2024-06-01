@@ -20,6 +20,7 @@ const CommentDisplayEditorComponent: React.FC<
   const [editMode, setEditMode] = useState<boolean>(false);
   const [message, setMessage] = useState<string>(comment.comment);
   const [author, setAuthor] = useState<string>(comment.username);
+  const [edited, setEdited] = useState<boolean>(comment.edited);
 
   const handleEditClick = () => {
     setEditMode(true);
@@ -39,7 +40,7 @@ const CommentDisplayEditorComponent: React.FC<
       message,
       author
     );
-    setIsBusy(false);
+    setEdited(true);
     if (ret) {
       setEditMode(false);
       toast.success('Comment removed successfully!');
@@ -58,9 +59,9 @@ const CommentDisplayEditorComponent: React.FC<
     );
     if (ret) {
       commentRemoved(comment.commentId);
-      console.log('Comment deleted successfully!');
+      toast.success('Comment deleted successfully!');
     } else {
-      console.log('Some error occurred while deleting comment.');
+      toast.error('Some error occurred while deleting comment.');
     }
     setIsBusy(false);
   };
@@ -73,6 +74,7 @@ const CommentDisplayEditorComponent: React.FC<
             {message}
           </div>
           <div className='text-gray-500'>{author}</div>
+          <div className='text-gray-300 text-xs'>{edited && 'Edited'}</div>
           <div className='flex justify-start my-2'>
             <SmartButton
               classNames='mr-2'
