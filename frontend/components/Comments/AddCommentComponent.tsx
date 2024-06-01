@@ -21,7 +21,7 @@ const AddCommentComponent: React.FC<AddCommentComponentProps> = ({
   const [isBusy, setIsBusy] = useState<boolean>(false);
 
   const handleSaveClick = async () => {
-    setIsBusy(true)
+    setIsBusy(true);
     const { success, commentId } = await addComment(postId, message, author);
     if (success) {
       var newComment = await getCommentById(postId, commentId);
@@ -30,19 +30,19 @@ const AddCommentComponent: React.FC<AddCommentComponentProps> = ({
         toast.success('Comment added successfully!');
         setMessage('');
         setAuthor('');
-        setIsBusy(false)
+        setIsBusy(false);
       } else {
         toast.error('Could not get the comment from read service!');
-        setIsBusy(false)
+        setIsBusy(false);
       }
     } else {
       toast.error('Some error occurred while adding comment!');
-      setIsBusy(false)
+      setIsBusy(false);
     }
   };
 
   return (
-    <>
+    <div className=' border-gray-300 border-b-2 mb-5'>
       <div className='font-bold text-lg mb-1'>Comment Content:</div>
       <textarea
         className='block border w-full mb-4 rounded border-spacing-1 px-2 py-1'
@@ -57,12 +57,16 @@ const AddCommentComponent: React.FC<AddCommentComponentProps> = ({
         className='block border w-full mb-4 text-sm p-2'
       />
       <div className='flex justify-between my-2'>
-        <SmartButton onClick={handleSaveClick} isBusy={isBusy} theme={SmartButtonTheme.Primary}>
+        <SmartButton
+          onClick={handleSaveClick}
+          isBusy={isBusy}
+          theme={SmartButtonTheme.Primary}
+        >
           <FaRegSave />
           <span className='mt-1 ml-1 text-sm'>Save</span>
         </SmartButton>
       </div>
-    </>
+    </div>
   );
 };
 

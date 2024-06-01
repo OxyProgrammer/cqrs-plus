@@ -1,22 +1,26 @@
 'use client';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { Post } from '@/models/models';
 import { editPost, likePost } from '@/utility/clientMethods';
 import { MdEdit } from 'react-icons/md';
 import { AiOutlineLike } from 'react-icons/ai';
-import { MdCancel } from "react-icons/md";
-import { FaRegSave } from "react-icons/fa";
-import { IoStar } from "react-icons/io5";
+import { MdCancel } from 'react-icons/md';
+import { FaRegSave } from 'react-icons/fa';
+import { IoStar } from 'react-icons/io5';
+import SmartButton from '@/components/SmartButton';
+import { SmartButtonTheme } from '@/components/SmartButton/SmartButtonTheme';
 
 interface PostEditorProps {
   post: Post;
 }
 
 const PostEditor: React.FC<PostEditorProps> = ({ post }) => {
-  
-  const [editMode, setEditMode] = useState(false);
-  const [message, setMessage] = useState(post.message);
-  const [author, setAuthor] = useState(post.author);
+  const [isBusy, setIsBusy] = useState<boolean>(false);
+  const [editMode, setEditMode] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>(post.message);
+  const [author, setAuthor] = useState<string>(post.author);
+  const [likes, setLikes] = useState<number>(post.likes);
 
   const handleEditClick = () => {
     setEditMode(true);
@@ -29,34 +33,37 @@ const PostEditor: React.FC<PostEditorProps> = ({ post }) => {
   };
 
   const handleLikeClick = async () => {
+    setIsBusy(true);
     const ret = await likePost(post.postId);
     if (ret) {
-      console.log('successfully liked post');
+      setLikes((prevLike) => prevLike + 1);
+      console.log(likes);
+      toast.success('Successfully liked post!');
     } else {
-      console.log('some error occurred while liking post');
+      toast.error('Some error occurred while liking post!');
     }
+    setIsBusy(false);
   };
 
   const handleSaveClick = async () => {
+    setIsBusy(true);
     const ret = await editPost(post.postId, message);
     if (ret) {
-      console.log('successfully edited post');
+      toast.success('Successfully edited post!');
     } else {
-      console.log('some error occurred while editing post');
+      toast.error('Some error occurred while editing post!');
     }
-
+    setIsBusy(false);
     setEditMode(false);
   };
 
-  const getLikeStars=(numberOfImages: number): React.ReactNode =>{
+  const getLikeStars = (numberOfImages: number): React.ReactNode => {
     const stars = [];
     for (let i = 0; i < numberOfImages; i++) {
-      stars.push(
-        <IoStar key={i} color='#FFAC33'/>
-      );
+      stars.push(<IoStar key={i} color='#FFAC33' />);
     }
     return stars;
-  }
+  };
 
   return (
     <div>
@@ -70,20 +77,22 @@ const PostEditor: React.FC<PostEditorProps> = ({ post }) => {
             {getLikeStars(post.likes)}
           </div>
           <div className='flex justify-between my-2'>
-            <button
-              className=' bg-blue-500 hover:bg-blue-700 text-white text-lg px-2 py-1 rounded inline-flex items-center'
+            <SmartButton
               onClick={handleEditClick}
+              isBusy={isBusy}
+              theme={SmartButtonTheme.Primary}
             >
               <MdEdit />
               <span className='ml-1'>Edit</span>
-            </button>
-            <button
-              className='bg-green-700 hover:bg-green-900 text-white px-2 py-1 text-lg rounded inline-flex items-center'
+            </SmartButton>
+            <SmartButton
               onClick={handleLikeClick}
+              isBusy={isBusy}
+              theme={SmartButtonTheme.Success}
             >
               <span className='mr-1'>Like</span>
               <AiOutlineLike />
-            </button>
+            </SmartButton>
           </div>
         </>
       ) : (
@@ -102,23 +111,25 @@ const PostEditor: React.FC<PostEditorProps> = ({ post }) => {
             className='block border w-full mb-4 text-sm p-2'
           />
           <div className='flex flex-wrap justify-end'>
-            {getLikeStars(post.likes)}
+            {getLikeStars(likes)}
           </div>
           <div className='flex justify-between my-2'>
-            <button
-              className='bg-red-500 hover:bg-red-700 text-white text-lg py-1 px-2 rounded inline-flex items-center'
+            <SmartButton
               onClick={handleCancelClick}
+              isBusy={isBusy}
+              theme={SmartButtonTheme.Danger}
             >
-              <MdCancel/>
+              <MdCancel />
               <span className='ml-1'>Cancel</span>
-            </button>
-            <button
-              className='bg-blue-500 hover:bg-blue-700 text-white text-lg py-1 px-2 rounded inline-flex items-center'
+            </SmartButton>
+            <SmartButton
               onClick={handleSaveClick}
+              isBusy={isBusy}
+              theme={SmartButtonTheme.Danger}
             >
-              <FaRegSave/>
+              <FaRegSave />
               <span className='ml-1'>Save</span>
-            </button>
+            </SmartButton>
           </div>
         </>
       )}

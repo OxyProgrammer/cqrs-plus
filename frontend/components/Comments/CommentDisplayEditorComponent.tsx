@@ -5,6 +5,8 @@ import { deleteComment, editComment } from '@/utility/clientMethods';
 import toast from 'react-hot-toast';
 import { MdEdit } from 'react-icons/md';
 import { FaRegTrashAlt } from 'react-icons/fa';
+import SmartButton from '@/components/SmartButton';
+import { SmartButtonTheme } from '@/components/SmartButton/SmartButtonTheme';
 
 interface CommentDisplayEditorComponentProps {
   comment: Comment;
@@ -14,6 +16,7 @@ interface CommentDisplayEditorComponentProps {
 const CommentDisplayEditorComponent: React.FC<
   CommentDisplayEditorComponentProps
 > = ({ comment, commentRemoved }) => {
+  const [isBusy, setIsBusy] = useState<boolean>(false);
   const [editMode, setEditMode] = useState<boolean>(false);
   const [message, setMessage] = useState<string>(comment.comment);
   const [author, setAuthor] = useState<string>(comment.username);
@@ -29,21 +32,25 @@ const CommentDisplayEditorComponent: React.FC<
   };
 
   const handleSaveClick = async () => {
+    setIsBusy(true);
     const ret = await editComment(
       comment.postId,
       comment.commentId,
       message,
       author
     );
+    setIsBusy(false);
     if (ret) {
       setEditMode(false);
       toast.success('Comment removed successfully!');
     } else {
       toast.error('Some error occurred while updating comment.');
     }
+    setIsBusy(false);
   };
 
   const handleDeleteClick = async () => {
+    setIsBusy(true);
     const ret = await deleteComment(
       comment.postId,
       comment.commentId,
@@ -55,6 +62,7 @@ const CommentDisplayEditorComponent: React.FC<
     } else {
       console.log('Some error occurred while deleting comment.');
     }
+    setIsBusy(false);
   };
 
   return (
@@ -66,18 +74,21 @@ const CommentDisplayEditorComponent: React.FC<
           </div>
           <div className='text-gray-500'>{author}</div>
           <div className='flex justify-start my-2'>
-            <button
-              className=' bg-blue-500 hover:bg-blue-700 text-white p-2 rounded inline-flex items-center'
+            <SmartButton
+              classNames='mr-2'
               onClick={handleEditClick}
+              isBusy={isBusy}
+              theme={SmartButtonTheme.Primary}
             >
               <MdEdit />
-            </button>
-            <button
-              className=' bg-red-500 hover:bg-red-700 text-white p-2 rounded inline-flex items-center ml-2'
+            </SmartButton>
+            <SmartButton
               onClick={handleDeleteClick}
+              isBusy={isBusy}
+              theme={SmartButtonTheme.Danger}
             >
               <FaRegTrashAlt />
-            </button>
+            </SmartButton>
           </div>
         </>
       ) : (
@@ -96,18 +107,20 @@ const CommentDisplayEditorComponent: React.FC<
             className='block border w-full mb-4 text-sm p-2'
           />
           <div className='flex justify-between my-2'>
-            <button
-              className='bg-red-500 hover:bg-red-700 text-white text-lg py-1 px-2 rounded'
+            <SmartButton
               onClick={handleCancelClick}
+              isBusy={isBusy}
+              theme={SmartButtonTheme.Danger}
             >
-              Cancel
-            </button>
-            <button
-              className='bg-blue-500 hover:bg-blue-700 text-white text-lg py-1 px-2 rounded'
+              <span>Cancel</span>
+            </SmartButton>
+            <SmartButton
               onClick={handleSaveClick}
+              isBusy={isBusy}
+              theme={SmartButtonTheme.Danger}
             >
-              Save
-            </button>
+              <span>Save</span>
+            </SmartButton>
           </div>
         </>
       )}

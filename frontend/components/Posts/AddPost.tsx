@@ -1,23 +1,32 @@
 'use client';
 import { addNewPost } from '@/utility/clientMethods';
 import React, { useState } from 'react';
-import { FaRegSave } from "react-icons/fa";
-import { useRouter } from 'next/router';
+import toast from 'react-hot-toast';
+import { FaRegSave } from 'react-icons/fa';
+import { useRouter } from 'next/navigation';
+import SmartButton from '@/components/SmartButton';
+import { SmartButtonTheme } from '@/components/SmartButton/SmartButtonTheme';
 
 const AddPost: React.FC = () => {
-
   const [message, setMessage] = useState<string>('');
   const [author, setAuthor] = useState<string>('');
+  const [isBusy, setIsBusy] = useState<boolean>(false);
+  const router = useRouter();
 
-  // const router = useRouter();
   const handleSaveClick = async () => {
+    setIsBusy(true);
     if (!message?.trim() || !author?.trim()) {
       alert('Both Message and Author needs to be supplied.');
       return;
     }
     const newPostId = await addNewPost(message, author);
-    console.log(newPostId);
-    // router.push(`post/${newPostId}`);
+    if (newPostId) {
+      toast.success('New Post created!');
+    } else {
+      toast.error('Some error occurred while creating new post!');
+    }
+    setIsBusy(false);
+    router.push(`posts/${newPostId}`);
   };
 
   return (
@@ -36,13 +45,14 @@ const AddPost: React.FC = () => {
         className='block border w-full mb-4 text-sm p-2'
       />
       <div className='flex justify-end my-2'>
-        <button
-          className='bg-blue-500 hover:bg-blue-700 text-white text-lg py-1 px-2 rounded inline-flex items-center'
+        <SmartButton
           onClick={handleSaveClick}
+          isBusy={isBusy}
+          theme={SmartButtonTheme.Primary}
         >
-           <FaRegSave/>
+          <FaRegSave />
           <span className='ml-1'>Save</span>
-        </button>
+        </SmartButton>
       </div>
     </div>
   );

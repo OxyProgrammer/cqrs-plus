@@ -21,7 +21,7 @@ export default function RootLayout({
         <div className='flex flex-col'>
           <Header />
           <main className='container mx-auto p-4 flex flex-col flex-grow min-h-screen'>
-            <Toaster position='bottom-left' />
+            <Toaster position='top-center' />
             {children}
           </main>
           <Footer />

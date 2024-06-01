@@ -2,15 +2,17 @@
 import { FilterArgs } from '@/models/models';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import SmartButton from '@/components/SmartButton';
+import { SmartButtonTheme } from '@/components/SmartButton/SmartButtonTheme';
 
 interface FilterProps {
   filterRequested: (filterArguments: FilterArgs) => Promise<void>;
 }
 const Filter: React.FC<FilterProps> = ({ filterRequested }) => {
-  
   const [selectedOption, setSelectedOption] = useState<string>('None');
   const [author, setAuthor] = useState<string>('');
   const [minLikes, setMinLikes] = useState<number>(0);
+  const [isBusy, setIsBusy] = useState<boolean>(false);
 
   const handleOptionChange = (option: string) => {
     setSelectedOption(option);
@@ -23,6 +25,7 @@ const Filter: React.FC<FilterProps> = ({ filterRequested }) => {
   };
 
   const handleSubmit = async () => {
+    setIsBusy(true);
     const filterArgs: FilterArgs = {
       filterCriteria: selectedOption,
       filterData: undefined,
@@ -34,25 +37,26 @@ const Filter: React.FC<FilterProps> = ({ filterRequested }) => {
         break;
       case 'Author':
         if (!author) {
-          toast.error('Provide Author.')
-          alert('Provide Author.');
+          toast.error('Provide Author.');
+          setIsBusy(false);
           return;
         }
         filterArgs.filterData = author;
         break;
       case 'MinLikes':
         if (!minLikes) {
-          toast.error('Provide Minimum Likes.')
-          alert('Provide Minimum Likes.');
+          toast.error('Provide Minimum Likes.');
+          setIsBusy(false);
           return;
         }
         filterArgs.filterData = minLikes;
         break;
       default:
-        toast.error('Some error happened!')
+        toast.error('Some error happened!');
         break;
     }
     await filterRequested(filterArgs);
+    setIsBusy(false);
   };
 
   return (
@@ -115,12 +119,19 @@ const Filter: React.FC<FilterProps> = ({ filterRequested }) => {
       </div>
 
       <div className='flex justify-end mt-4'>
-        <button
+        {/* <button
           className='bg-green-700 hover:bg-green-900 text-white py-2 px-4 rounded'
           onClick={handleSubmit}
         >
           Submit
-        </button>
+        </button> */}
+        <SmartButton
+          onClick={handleSubmit}
+          isBusy={isBusy}
+          theme={SmartButtonTheme.Primary}
+        >
+          <span>Submit</span>
+        </SmartButton>
       </div>
     </div>
   );

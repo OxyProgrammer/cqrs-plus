@@ -3,9 +3,9 @@ import { SmartButtonTheme } from './SmartButtonTheme';
 
 interface SmartButtonProps {
   children: React.ReactNode;
-  //   children: string | JSX.Element | JSX.Element[] | { (): JSX.Element };
   theme: SmartButtonTheme;
   isBusy: boolean;
+  classNames?:string
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -13,7 +13,8 @@ const SmartButton: React.FC<SmartButtonProps> = ({
   children,
   theme,
   isBusy,
-  onClick
+  classNames,
+  onClick,
 }) => {
   let colorName = '';
   switch (theme) {
@@ -32,12 +33,11 @@ const SmartButton: React.FC<SmartButtonProps> = ({
   classNameString = !isBusy
     ? `bg-${colorName}-500 hover:bg-${colorName}-700 text-white py-1 px-2 rounded inline-flex items-center`
     : `bg-${colorName}-500 hover:bg-${colorName}-700 text-white py-1 px-2 rounded inline-flex items-center opacity-50 cursor-not-allowed`;
-
+  if(classNames){
+    classNameString=`${classNameString} ${classNames}`
+  }
   return (
-    <button onClick={onClick}
-      className={classNameString}
-      disabled={isBusy}
-    >
+    <button onClick={onClick} className={classNameString} disabled={isBusy}>
       {isBusy && (
         <svg
           className='animate-spin -ml-1 mr-3 h-5 w-5 text-white'
