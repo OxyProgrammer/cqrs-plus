@@ -62,6 +62,7 @@ namespace Post.Cmd.Infrastructure.Stores
                     EventData = @event,
                 };
 
+                //TODO: This is where state machine replication should be implemented. Probably using outbox pattern.
                 await _eventStoreRepository.SaveAsync(eventModel);
 
                 var topic = Environment.GetEnvironmentVariable("KAFKA_TOPIC");
